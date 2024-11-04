@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const page = () => {
+const Page = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ const page = () => {
   };
   return (
     <div className="flex items-center justify-center h-screen ">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-80 bg-blue-950">
+      <div className="rounded-lg shadow-lg p-6 w-80 bg-blue-950">
         {/* Circular Image */}
         <div className="flex justify-center mb-4">
           <Image
@@ -72,4 +72,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

@@ -2,7 +2,7 @@ import React from 'react'
 import { FaUpload } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 
-const page = () => {
+const Page = () => {
   return (
     <div className="flex flex-col p-10">
       {/* Header */}
@@ -44,7 +44,9 @@ const page = () => {
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {1}
               </div>
-              <span className="">Uploaded Doc File.doc</span>
+              <span className="">
+                Uploaded Doc File.doc
+              </span>
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
@@ -86,4 +88,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
