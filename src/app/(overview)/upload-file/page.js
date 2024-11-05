@@ -42,7 +42,7 @@ const Page = () => {
                 <span className="">Uploaded Doc File.doc</span>
                 <span className="block text-gray-400 text-xs">12 KB</span> 
               </div>
-              <TiTick className="text-custom-green text-xl" />
+              <TiTick className="text-green-500 text-xl" />
             </li>
 
             <li className="flex items-center">
@@ -51,7 +51,7 @@ const Page = () => {
               </div>
               <div>
                 <span className="">Total Pages</span>
-                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+                <span className="block text-gray-400 text-xs">12 KB</span>
               </div>
             </li>
 
@@ -61,7 +61,7 @@ const Page = () => {
               </div>
               <div>
                 <span className="">Total Words</span>
-                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+                <span className="block text-gray-400 text-xs">12 KB</span> 
               </div>
             </li>
 
@@ -71,7 +71,7 @@ const Page = () => {
               </div>
               <div>
                 <span className="">Total Characters</span>
-                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+                <span className="block text-gray-400 text-xs">12 KB</span> 
               </div>
             </li>
 
@@ -81,7 +81,7 @@ const Page = () => {
               </div>
               <div>
                 <span className="">Change Tracker Status</span>
-                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+                <span className="block text-gray-400 text-xs">12 KB</span> 
               </div>
             </li>
 

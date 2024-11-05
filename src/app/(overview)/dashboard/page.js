@@ -16,8 +16,6 @@ const Page = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card icon={<MdUploadFile className='text-6xl' />} text="Upload File" />
         <Card icon={<MdHistory className='text-6xl' />} text="View Log" />
-        {/* <Card icon={<MdSettings />} text="Settings" />
-      <Card icon={<MdInfo />} text="About" /> */}
       </div>
     </div>
   )

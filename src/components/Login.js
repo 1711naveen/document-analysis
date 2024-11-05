@@ -27,7 +27,7 @@ const Login = () => {
 
         <h2 className="text-center text-2xl font-bold mb-4">Log in</h2>
 
-        <p className="text-center text-sm mb-4">
+        <p className="text-center text-xs mb-4">
           Don&apos;t have an account? <a href="/signup" className="">Sign up</a>
         </p>
 
@@ -40,7 +40,7 @@ const Login = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border border-white outline-none rounded bg-[#323A4F] text-white placeholder:text-gray-400"
+            className="w-full p-2 border border-white outline-none rounded-lg bg-[#323A4F] text-white placeholder:text-gray-400"
             required
           />
         </div>
@@ -53,7 +53,7 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border border-white outline-none rounded bg-[#323A4F] text-white placeholder:text-gray-400"
+            className="w-full p-2 border border-white outline-none rounded-lg bg-[#323A4F] text-white placeholder:text-gray-400"
             required
           />
           <span
