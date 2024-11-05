@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaUpload } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
+import { TiTick } from "react-icons/ti";
 
 const Page = () => {
   return (
@@ -31,54 +32,57 @@ const Page = () => {
         {/* Right Box */}
         <div className="flex-1 p-4 ">
           <ul className="space-y-4">
-            {/* {Array.from({ length: 6 }).map((_, index) => (
-              <li key={index} className="flex items-center">
-                <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
-                  {index + 1}
-                </div>
-                <span className="">Dummy text for item {index + 1}</span>
-              </li>
-            ))} */}
+        
 
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {1}
               </div>
-              <span className="">
-                Uploaded Doc File.doc
-              </span>
+              <div className="flex-1">
+                <span className="">Uploaded Doc File.doc</span>
+                <span className="block text-gray-400 text-xs">12 KB</span> 
+              </div>
+              <TiTick className="text-custom-green text-xl" />
             </li>
+
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {2}
               </div>
-              <span className="">
-                Total Pages
-              </span>
+              <div>
+                <span className="">Total Pages</span>
+                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+              </div>
             </li>
+
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {3}
               </div>
-              <span className="">
-                Total Words
-              </span>
+              <div>
+                <span className="">Total Words</span>
+                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+              </div>
             </li>
+
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {4}
               </div>
-              <span className="">
-                Total Characters
-              </span>
+              <div>
+                <span className="">Total Characters</span>
+                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+              </div>
             </li>
+
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
                 {5}
               </div>
-              <span className="">
-                Change Tracker Status
-              </span>
+              <div>
+                <span className="">Change Tracker Status</span>
+                <span className="block text-gray-400 text-xs">12 KB</span> {/* File size in small font */}
+              </div>
             </li>
 
           </ul>
