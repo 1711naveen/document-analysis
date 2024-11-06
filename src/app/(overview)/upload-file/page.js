@@ -1,28 +1,62 @@
 'use client'
 import Link from 'next/link';
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { FiUpload } from 'react-icons/fi';
 import { TiTick } from "react-icons/ti";
 
 const Page = () => {
   const fileInputRef = useRef(null);
+  const [files, setFiles] = useState([]);
 
-  // Function to trigger file input
   const handleFileUploadClick = () => {
     fileInputRef.current.click();
   };
-  return (
-    <div className="flex flex-col p-10">
-      <h1 className="text-3xl font-bold mb-4 text-left">Upload File</h1>
 
-      <div className="flex bg-[#323A4F] rounded-lg mt-4 py-8">
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const droppedFiles = e.dataTransfer.files;
+    setFiles(droppedFiles);
+    console.log(droppedFiles);
+    // Handle file upload logic here
+  };
+
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+    const uploadedFile = e.target.files;
+    setFiles(uploadedFile);
+    console.log(uploadedFile);
+  };
+
+  return (
+    <div className="p-6 w-full max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Upload File</h1>
+
+      <div className="flex bg-light-background rounded-lg mt-4 py-8">
         <div className="flex-1 p-4 mr-4 border-r">
           <div className="flex flex-col items-center">
+            {
+            files.length===0
+            ?
             <div
               onClick={handleFileUploadClick}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
               className='flex items-center justify-center w-64 h-32 border rounded-lg cursor-pointer'>
               <FiUpload className="text-6xl mb-2" />
             </div>
+            :
+            <div
+              onClick={handleFileUploadClick}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              className='flex items-center justify-center w-64 h-32 border rounded-lg cursor-pointer'>
+              {files[0].name}
+            </div>
+            }
 
             <div className='my-6'>
               <p className='text-center'>Drag or Drop File</p>
@@ -35,9 +69,10 @@ const Page = () => {
             </button>
             <input
               type="file"
+              accept=".doc,.docx"
               ref={fileInputRef}
               style={{ display: 'none' }}
-              onChange={(e) => console.log(e.target.files)} // Handle file selection here
+              onChange={handleFileUpload}
             />
           </div>
         </div>
