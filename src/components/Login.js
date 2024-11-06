@@ -2,19 +2,26 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useRouter } from 'next/navigation'
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('temp@gmail.com');
+  const [password, setPassword] = useState('12345');
+  const router = useRouter()
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = () => {  
     setShowPassword(!showPassword);
   };
+  const handleLogin = () => {
+    console.log(email)
+    console.log(password);
+    router.push('/dashboard')
+  }
+
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="rounded-lg shadow-lg p-10 w-4/12 bg-[#323A4F]">
-        {/* Circular Image */}
         <div className="flex justify-center mb-2">
           <Image
             src="/path-to-your-image.png"
@@ -31,7 +38,6 @@ const Login = () => {
           Don&apos;t have an account? <a href="/signup" className="">Sign up</a>
         </p>
 
-        {/* Email Field */}
         <div className="mb-4">
           <label htmlFor="email" className="block text-xs">Your email</label>
           <input
@@ -45,9 +51,8 @@ const Login = () => {
           />
         </div>
 
-        {/* Password Field */}
         <div className="relative mb-2">
-        <label htmlFor="password" className="block text-xs">Your password</label>
+          <label htmlFor="password" className="block text-xs">Your password</label>
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
@@ -68,8 +73,7 @@ const Login = () => {
           Forgot your password?
         </p>
 
-        {/* Login Button */}
-        <button className="w-full bg-custom-green text-white text-sm py-2 rounded-xl">
+        <button className="w-full bg-custom-green text-white text-sm py-2 rounded-xl" onClick={handleLogin}>
           Log in
         </button>
       </div>

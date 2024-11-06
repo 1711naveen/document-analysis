@@ -4,7 +4,7 @@ import { TiTick } from "react-icons/ti";
 const Report = () => {
   return (
     <div className="flex flex-col p-10">
-      <h1 className="text-3xl font-bold mb-4 text-left">Upload File</h1>
+      <h1 className="text-3xl font-bold mb-4 text-left">Report</h1>
 
       <div className="flex-1 p-4 bg-light-background rounded-lg">
         <ul className="space-y-4">

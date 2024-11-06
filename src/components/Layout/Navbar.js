@@ -18,14 +18,13 @@ const Navbar = () => {
     } else {
       document.body.style.overflow = 'auto';
     }
-    // Clean up style on component unmount
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, [isOpen]);
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-[#202940] text-white">
+    <nav className="flex justify-between items-center p-4 bg-background text-white">
       <div className="text-xl font-bold">
         Documents Analysis Tool
       </div>
@@ -44,15 +43,19 @@ const Navbar = () => {
 
       {isOpen ? (
         <>
-          {/* Blur Backdrop */}
           <div 
             className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
             onClick={toggleSidebar}
           ></div>
 
-          <div
+          {/* <div
             className="absolute right-0 top-0 w-1/4 h-lvh z-100 bg-light-background text-white overflow-y-auto p-10"
-          > 
+          > */}
+
+<div
+  className={`absolute right-0 top-0 w-1/4 h-screen z-100 bg-light-background text-white overflow-y-auto p-10 transition-all duration-1000 ease-in-out ${isOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}`}
+>
+  
             <div onClick={toggleSidebar} className="text-light-background absolute top-5 left-4 cursor-pointer">
               <RxCross2 className="text-white text-xl" />
             </div>
@@ -90,7 +93,9 @@ const Navbar = () => {
             </div>
           </div>
         </>
-      ) : null}
+      ) : 
+      null
+      }
 
     </nav>
   )

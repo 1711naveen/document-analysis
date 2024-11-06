@@ -12,6 +12,7 @@ module.exports = {
         foreground: "var(--foreground)",
         'custom-green': '#018934',
         'light-background': '#323A4F',
+        'side-bar':'#101B36',
       },
     },
   },
