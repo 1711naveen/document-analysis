@@ -17,10 +17,10 @@ const Login = () => {
         {/* Circular Image */}
         <div className="flex justify-center mb-2">
           <Image
-            src="/path-to-your-image.png" // Replace with your image path in the public folder
+            src="/path-to-your-image.png"
             alt="Logo"
-            width={60} // Width of the image
-            height={60} // Height of the image
+            width={60}
+            height={60}
             className="rounded-full"
           />
         </div>
@@ -58,7 +58,7 @@ const Login = () => {
           />
           <span
             onClick={togglePasswordVisibility}
-            className="absolute right-3 bottom-4 cursor-pointer"
+            className="absolute -top-1 right-1 cursor-pointer"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>

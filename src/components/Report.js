@@ -1,39 +1,69 @@
 import React from 'react'
+import { TiTick } from "react-icons/ti";
 
 const Report = () => {
   return (
-    <div className="p-6 bg-gray-100 rounded-lg shadow-lg w-full max-w-md">
-      {/* Report Title */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Report</h2>
+    <div className="flex flex-col p-10">
+      <h1 className="text-3xl font-bold mb-4 text-left">Upload File</h1>
 
-      {/* List Container */}
-      <ul className="space-y-4">
-        <li className="flex items-center space-x-4">
-          <div className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full text-lg font-bold">1</div>
-          <span className="text-gray-700 text-md">Report Item 1</span>
-        </li>
+      <div className="flex-1 p-4 bg-light-background rounded-lg">
+        <ul className="space-y-4">
 
-        <li className="flex items-center space-x-4">
-          <div className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full text-lg font-bold">2</div>
-          <span className="text-gray-700 text-md">Report Item 2</span>
-        </li>
+          <li className="flex items-center">
+            <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              {1}
+            </div>
+            <div className="flex-1">
+              <span className="">Uploaded Doc File.doc</span>
+              <span className="block text-gray-400 text-xs">12 KB</span>
+            </div>
+            <TiTick className="text-green-500 text-xl" />
+          </li>
 
-        <li className="flex items-center space-x-4">
-          <div className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full text-lg font-bold">3</div>
-          <span className="text-gray-700 text-md">Report Item 3</span>
-        </li>
+          <li className="flex items-center">
+            <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              {2}
+            </div>
+            <div>
+              <span className="">Total Pages</span>
+              <span className="block text-gray-400 text-xs">12 KB</span>
+            </div>
+          </li>
 
-        <li className="flex items-center space-x-4">
-          <div className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full text-lg font-bold">4</div>
-          <span className="text-gray-700 text-md">Report Item 4</span>
-        </li>
+          <li className="flex items-center">
+            <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              {3}
+            </div>
+            <div>
+              <span className="">Total Words</span>
+              <span className="block text-gray-400 text-xs">12 KB</span>
+            </div>
+          </li>
 
-        <li className="flex items-center space-x-4">
-          <div className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full text-lg font-bold">5</div>
-          <span className="text-gray-700 text-md">Report Item 5</span>
-        </li>
-      </ul>
+          <li className="flex items-center">
+            <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              {4}
+            </div>
+            <div>
+              <span className="">Total Characters</span>
+              <span className="block text-gray-400 text-xs">12 KB</span>
+            </div>
+          </li>
+
+          <li className="flex items-center">
+            <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              {5}
+            </div>
+            <div>
+              <span className="">Change Tracker Status</span>
+              <span className="block text-gray-400 text-xs">12 KB</span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
     </div>
+
   )
 }
 
