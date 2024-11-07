@@ -21,8 +21,8 @@ const Page = () => {
         </div>
 
         <div className="mt-6 flex justify-center space-x-4">
-          <button className="bg-custom-green text-white px-4 py-2 rounded-md ">Download File</button>
-          <button className="bg-custom-green text-white px-4 py-2 rounded-md ">Download Log File</button>
+          <button className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md ">Download File</button>
+          <button className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md ">Download Log File</button>
         </div>
 
       </div>

@@ -3,6 +3,7 @@ import { FaCog, FaKey, FaChartBar, FaQuestionCircle, FaInfoCircle, FaSignOutAlt 
 import { CgProfile } from "react-icons/cg";
 import { RxCross2 } from "react-icons/rx";
 import { redirect } from 'next/navigation'
+import Link from 'next/link';
 
 const RightSidebar = ({ toggleSidebar }) => {
   const handleLogout = () => {
@@ -33,33 +34,40 @@ const RightSidebar = ({ toggleSidebar }) => {
         <div className="border-t border-white mt-6"></div>
 
         <div className="flex flex-col h-full mt-6">
-          <ul className="space-y-4 text-center">
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
-              <FaCog className="text-xl" />
-              <span>Settings</span>
-            </li>
+          <ul className="text-center">
+            <Link href="/change-password">
+              <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
+                <FaCog className="text-xl" />
+                <span>Settings</span>
+              </li>
+            </Link>
+            <Link href="/change-password">
+              <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
+                <FaKey className="text-xl" />
+                <span>Change Password</span>
+              </li>
+            </Link>
 
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
-              <FaKey className="text-xl" />
-              <span>Change Password</span>
-            </li>
-
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
-              <FaChartBar className="text-xl" />
-              <span>Statistics</span>
-            </li>
-
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
-              <FaQuestionCircle className="text-xl" />
-              <span>Help</span>
-            </li>
-
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
-              <FaInfoCircle className="text-xl" />
-              <span>About</span>
-            </li>
-
-            <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer"
+            <Link href="/change-password">
+              <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
+                <FaChartBar className="text-xl" />
+                <span>Statistics</span>
+              </li>
+            </Link>
+            <Link href="/change-password">
+              <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
+                <FaQuestionCircle className="text-xl" />
+                <span>Help</span>
+              </li>
+            </Link>
+            <Link href="/change-password">
+              <li className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer">
+                <FaInfoCircle className="text-xl" />
+                <span>About</span>
+              </li>
+            </Link>
+            <li
+              className="flex items-center space-x-2 py-3 px-1 hover:bg-gray-700 rounded-md text-light-black cursor-pointer"
               onClick={handleLogout}>
               <FaSignOutAlt className="text-xl" />
               <span>Sign Out</span>

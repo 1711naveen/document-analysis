@@ -75,7 +75,7 @@ const Login = () => {
           Forgot your password?
         </p>
 
-        <button className="w-full bg-custom-green text-white text-sm py-2 rounded-xl" onClick={handleLogin}>
+        <button className="w-full bg-custom-green hover:bg-green-500 text-white text-sm py-2 rounded-xl" onClick={handleLogin}>
           Log in
         </button>
       </div>

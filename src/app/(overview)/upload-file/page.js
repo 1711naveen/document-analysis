@@ -64,7 +64,7 @@ const Page = () => {
             </div>
             <button
               onClick={handleFileUploadClick}
-              className="bg-custom-green text-white py-2 px-4 rounded">
+              className="bg-custom-green hover:bg-green-500 text-white py-2 px-4 rounded">
               BROWSE
             </button>
             <input
@@ -117,7 +117,7 @@ const Page = () => {
               </div>
             </li>
             <li className="flex items-center">
-              <div className="flex items-center justify-center bg-custom-green text-white rounded-full w-10 h-10 mr-3">
+              <div className="flex items-center justify-center bg-custom-green  text-white rounded-full w-10 h-10 mr-3">
                 {5}
               </div>
               <div>
@@ -128,7 +128,7 @@ const Page = () => {
           </ul>
           <Link href="/automation">
             <div className="flex justify-end mt-6 ">
-              <button className=" text-white px-6 py-2 rounded-md border border-white">NEXT</button>
+              <button className=" text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white">NEXT</button>
             </div>
           </Link>
         </div>
