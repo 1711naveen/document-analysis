@@ -5,19 +5,45 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation'
 import { CgProfile } from "react-icons/cg";
 
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('temp@gmail.com');
+  const [email, setEmail] = useState('admin@demo.com');
   const [password, setPassword] = useState('12345');
-  const router = useRouter()
+  const [errorMessage, setErrorMessage] = useState('');
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  const handleLogin = () => {
+
+  const handleLogin = async () => {
     console.log(email)
     console.log(password);
-    router.push('/dashboard')
+    try {
+      const response = await fetch('api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      const data = await response.json();
+      console.log(data)
+      if (data.success) {
+        localStorage.setItem('access_token', data.accessToken);
+        router.push('/dashboard');
+      } else {
+        console.log(data.message);
+        setErrorMessage(data.message);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   }
 
   return (
@@ -78,6 +104,11 @@ const Login = () => {
         <button className="w-full bg-custom-green hover:bg-green-500 text-white text-sm py-2 rounded-xl" onClick={handleLogin}>
           Log in
         </button>
+        {errorMessage && (
+          <div className="mt-4 text-red-500">
+            {errorMessage}
+          </div>
+        )}
       </div>
     </div>
   )

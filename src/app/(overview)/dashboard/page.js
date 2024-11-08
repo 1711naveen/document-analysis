@@ -11,18 +11,18 @@ const Card = ({ icon, text }) => (
 
 const Page = () => {
   return (
-    <div className="p-6 rounded-lg w-full max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-left text-white">Dashboard</h2>
+      <div className="p-6 rounded-lg w-full max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold mb-6 text-left text-white">Dashboard</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Link href="/upload-file">
-          <Card icon={<MdUploadFile className='text-6xl' />} text="Upload File" />
-        </Link>
-        <Link href="/view-log">
-          <Card icon={<MdHistory className='text-6xl' />} text="View Log" />
-        </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Link href="/upload-file">
+            <Card icon={<MdUploadFile className='text-6xl' />} text="Upload File" />
+          </Link>
+          <Link href="/view-log">
+            <Card icon={<MdHistory className='text-6xl' />} text="View Log" />
+          </Link>
+        </div>
       </div>
-    </div>
   )
 }
 
