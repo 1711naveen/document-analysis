@@ -10,6 +10,7 @@ const Page = () => {
   const [files, setFiles] = useState([]);
   const [fileData, setFileData] = useState({});
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [docId, setDocId] = useState();
 
   const handleFileUploadClick = () => {
     fileInputRef.current.click();
@@ -35,7 +36,6 @@ const Page = () => {
       })
       const data = await response.json();
       setFileData(data);
-      console.log(data.message);
     }
     catch (error) {
       console.error('File upload failed:', error);
@@ -45,7 +45,6 @@ const Page = () => {
   const handleFileUpload = async (event) => {
     event.preventDefault();
     const file = event.target.files[0];
-    console.log(event.target.files)
     setFiles(file);
     if (!file)
       return;
@@ -57,7 +56,6 @@ const Page = () => {
     formData.append('size', file.size);
 
     const token = localStorage.getItem('access_token');
-    console.log(token);
 
     try {
       const response = await fetch('/api/upload', {
@@ -69,8 +67,8 @@ const Page = () => {
       });
 
       const data = await response.json();
+      setDocId(data.doc_id)
       setFileData(data);
-      console.log(data.message);
     } catch (error) {
       console.error('File upload failed:', error);
     }
@@ -148,27 +146,27 @@ const Page = () => {
                 <span className="">Total Pages</span>
                 <span className="block text-gray-400 text-xs">{fileData.pages || '---'}</span>
               </div>
-              {fileData.pages?<TiTick className="text-green-500 text-xl" />:<RxCross2 className='text-red-500 font-bold'/>}
+              {fileData.pages ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
-              {fileData.words || '---'}
+                {fileData.words || '---'}
               </div>
               <div className="flex-1">
                 <span className="">Total Words</span>
                 <span className="block text-gray-400 text-xs">{fileData.words || '---'}</span>
               </div>
-              {fileData.words?<TiTick className="text-green-500 text-xl" />:<RxCross2 className='text-red-500 font-bold'/>}
+              {fileData.words ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
-              {fileData.characters || '---'}
+                {fileData.characters || '---'}
               </div>
               <div className="flex-1">
                 <span className="">Total Characters</span>
                 <span className="block text-gray-400 text-xs">{fileData.characters || '---'}</span>
               </div>
-              {fileData.characters?<TiTick className="text-green-500 text-xl" />:<RxCross2 className='text-red-500 font-bold'/>}
+              {fileData.characters ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
@@ -180,10 +178,10 @@ const Page = () => {
               </div>
               {/* <TiTick className="text-green-500 text-xl" />
               {fileData.characters?<TiTick className="text-green-500 text-xl" />:<RxCross2 className='text-red-500 font-bold'/>} */}
-              <RxCross2 className='text-red-500 font-bold'/>
+              <RxCross2 className='text-red-500 font-bold' />
             </li>
           </ul>
-          <Link href="/automation">
+          <Link href={{ pathname: "/automation", query: {doc_id:docId} }} >
             <div className="flex justify-end mt-6 ">
               <button className=" text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white">NEXT</button>
             </div>

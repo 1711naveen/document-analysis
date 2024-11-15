@@ -20,7 +20,7 @@ export async function POST(request) {
       const accessToken = jwt.sign(
         { email: email },
         JWT_SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '6h' }
       );
       return NextResponse.json({ success: true, message: 'Login successful', accessToken: accessToken });
     } else {

@@ -36,12 +36,17 @@ const Navbar = () => {
 
         <button className="flex items-center space-x-1" onClick={toggleSidebar}>
           <FiMenu className="text-2xl" />
-          <span>Menu</span>
+          <div className="group">
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-300 group-hover:bg-[200%_200%] group-hover:animate-gradient">
+              Menu
+            </span>
+          </div>
+
         </button>
       </div>
 
       {isOpen ? (
-        <RightSidebar toggleSidebar={toggleSidebar}/>
+        <RightSidebar toggleSidebar={toggleSidebar} />
       ) :
         null
       }

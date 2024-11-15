@@ -13,12 +13,12 @@ const RightSidebar = ({ toggleSidebar }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+        className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-1"
         onClick={toggleSidebar}
       ></div>
 
       <div
-        className="absolute right-0 top-0 w-1/4 h-lvh z-100 bg-light-background text-white overflow-y-auto p-10"
+        className="absolute right-0 top-0 w-1/4 h-lvh z-2 bg-light-background text-white overflow-y-auto p-10"
       >
         <div onClick={toggleSidebar} className="text-light-background absolute top-5 left-4 cursor-cursor-pointer">
           <RxCross2 className="text-white text-xl" />
