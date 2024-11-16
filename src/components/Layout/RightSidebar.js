@@ -6,6 +6,8 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link';
 
 const RightSidebar = ({ toggleSidebar }) => {
+  const name = localStorage.getItem('name')
+  const email = localStorage.getItem('email');
   const handleLogout = () => {
     localStorage.clear();
     redirect('/')
@@ -26,8 +28,8 @@ const RightSidebar = ({ toggleSidebar }) => {
         <div className="flex items-center mt-10">
           <CgProfile className="text-6xl text-light-black" />
           <div className="ml-4 text-white">
-            <h2 className="text-lg">XYZ</h2>
-            <p className="text-sm text-gray-400">xyz.doe@example.com</p>
+            <h2 className="text-lg">{name}</h2>
+            <p className="text-sm text-gray-400">{email}</p>
           </div>
         </div>
 

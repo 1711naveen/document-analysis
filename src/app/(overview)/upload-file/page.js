@@ -9,8 +9,10 @@ const Page = () => {
   const fileInputRef = useRef(null);
   const [files, setFiles] = useState([]);
   const [fileData, setFileData] = useState({});
+  const [error, setError] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const [docId, setDocId] = useState();
+
 
   const handleFileUploadClick = () => {
     fileInputRef.current.click();
@@ -23,18 +25,41 @@ const Page = () => {
   const handleDrop = async (e) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
-    setFiles(droppedFile);
+    if (droppedFile) {
+      const fileType = droppedFile.name.split('.').pop().toLowerCase();
+      if (fileType === 'doc' || fileType === 'docx') {
+        setError('');
+        setFiles(droppedFile);
+      } else {
+        setError('Only .doc or docx files are accepted.');
+        setFiles([]);
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+        return;
+      }
+    }
 
-    if (!droppedFile)
-      return;
+
     const formData = new FormData();
     formData.append('file', droppedFile);
+    formData.append('name', droppedFile.name);
+    formData.append('type', droppedFile.type);
+    formData.append('size', droppedFile.size);
+    formData.append('file', droppedFile);
+
+    const token = localStorage.getItem('access_token');
+
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         body: formData
       })
       const data = await response.json();
+      setDocId(data.doc_id)
       setFileData(data);
     }
     catch (error) {
@@ -45,9 +70,20 @@ const Page = () => {
   const handleFileUpload = async (event) => {
     event.preventDefault();
     const file = event.target.files[0];
-    setFiles(file);
-    if (!file)
-      return;
+    if (file) {
+      const fileType = file.name.split('.').pop().toLowerCase();
+      if (fileType === 'doc' || fileType === 'docx') {
+        setError('');
+        setFiles(file);
+      } else {
+        setError('Only .doc or docx files are accepted.');
+        setFiles([]);
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+        return;
+      }
+    }
 
     const formData = new FormData();
     formData.append('file', file);
@@ -77,9 +113,9 @@ const Page = () => {
   return (
     <div className="p-6 w-full max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Upload File</h1>
-
       <div className="flex bg-light-background rounded-lg mt-4 py-8">
         <div className="flex-1 p-4 mr-4 border-r">
+          {error && <p className='text-white text-center pb-4'>{error}</p>}
           <div className="flex flex-col items-center">
             {
               files.length === 0
@@ -134,7 +170,7 @@ const Page = () => {
               </div>
               <div className="flex-1">
                 <span className="">Uploaded {files.name}</span>
-                <span className="block text-gray-400 text-xs">{files.size}</span>
+                <span className="block text-gray-400 text-xs">{parseFloat(files.size / 1024).toFixed(2)} KB</span>
               </div>
               <TiTick className="text-green-500 text-xl" />
             </li>
@@ -181,7 +217,7 @@ const Page = () => {
               <RxCross2 className='text-red-500 font-bold' />
             </li>
           </ul>
-          <Link href={{ pathname: "/automation", query: {doc_id:docId} }} >
+          <Link href={{ pathname: "/automation", query: { doc_id: docId } }} >
             <div className="flex justify-end mt-6 ">
               <button className=" text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white">NEXT</button>
             </div>

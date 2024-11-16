@@ -15,6 +15,7 @@ export async function POST(request) {
       'SELECT * FROM admins WHERE admin_email = ? and admin_password = ? and status = 1',
       [email, hashedPassword]
     );
+    console.log(rows)
 
     if (rows.length > 0) {
       const accessToken = jwt.sign(
@@ -22,7 +23,7 @@ export async function POST(request) {
         JWT_SECRET,
         { expiresIn: '6h' }
       );
-      return NextResponse.json({ success: true, message: 'Login successful', accessToken: accessToken });
+      return NextResponse.json({ success: true, message: 'Login successful', accessToken: accessToken, name: rows[0].admin_name, email: rows[0].admin_email });
     } else {
       return NextResponse.json({ success: false, message: 'Invalid credentials' });
     }

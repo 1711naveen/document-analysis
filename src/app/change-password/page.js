@@ -2,17 +2,54 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { useRouter } from 'next/navigation'
 import { CgProfile } from "react-icons/cg";
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevShow) => !prevShow);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const toggleNewPasswordVisibility = () => {
+    setShowNewPassword((prevShow) => !prevShow);
   };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prevShow) => !prevShow);
+  };
+
+
+  const handleChange = async (e) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      setErrorMessage("Passwords do not match!");
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+      return;
+    }
+    try {
+      const email = localStorage.getItem('email')
+      const response = await fetch('/api/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, newPassword, confirmPassword })
+      })
+      const data = await response.json();
+      console.log(data)
+      if (data.success) {
+        router.push('/dashboard');
+      }
+    } catch (error) {
+      console.log("some error happened", error)
+    }
+  }
 
   return (
     <div className="flex items-center justify-center h-screen ">
@@ -36,10 +73,20 @@ const Page = () => {
 
         <div>
           <div className="mb-4">
-            <label htmlFor="new-password" className="block text-sm">New Password</label>
+            <div className="flex items-center justify-between">
+              <label htmlFor="new-password" className="block text-sm">
+                New Password
+              </label>
+              <span
+                className="cursor-pointer text-gray-400"
+                onClick={toggleNewPasswordVisibility}
+              >
+                {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             <input
               id="new-password"
-              type={showPassword ? "text" : "password"}
+              type={showNewPassword ? "text" : "password"}
               placeholder="New Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -48,27 +95,37 @@ const Page = () => {
             />
           </div>
 
-          <div className="relative mb-4">
-            <label htmlFor="confirm-password" className="block text-sm">Confirm Password</label>
+          <div className="mb-4">
+            <div className="flex items-center justify-between">
+              <label htmlFor="confirm-password" className="block text-sm">
+                Confirm Password
+              </label>
+              <span
+                className="cursor-pointer text-gray-400"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
             <input
               id="confirm-password"
-              type={showPassword ? "text" : "password"}
+              type={showConfirmPassword ? "text" : "password"}
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full p-2 border border-white outline-none rounded-lg bg-light-background text-white placeholder:text-gray-400"
               required
             />
-            <span
-              onClick={togglePasswordVisibility}
-              className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-gray-400"
-            >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
-            </span>
           </div>
         </div>
 
-        <button className="w-full bg-custom-green text-white text-sm py-2 rounded-xl" >
+        {errorMessage && (
+          <div className="text-red-500 text-sm mb-2">{errorMessage}</div>
+        )}
+
+        <button
+          className="w-full bg-custom-green text-white text-sm py-2 rounded-xl"
+          onClick={handleChange}>
           Change Password
         </button>
       </div>

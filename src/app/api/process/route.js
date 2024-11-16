@@ -74,17 +74,24 @@ export async function GET(request) {
     try {
       //Extract text from doc/docx file using word-extractor
       const extractor = new WordExtractor();
+      const extracted = await extractor.extract(filePath);
+      const text = extracted.getBody();
+      const fileContent = text;
 
-      const result = await mammoth.extractRawText({ path: filePath });
-      const fileContent = result.value;
+      // const result = await mammoth.extractRawText({ path: filePath });
+      // const fileContent = result.value;
       const figureArray = fileContent.match(/Figure \d+\.\d+:.*\./g);
-      console.log(figureArray);
 
       const tableArray = fileContent.match(/Table \d+\.\d+:.*\./g);
-      console.log(tableArray);
 
       writeArrayToDocx(tableArray, "Table.docx", id);
       writeArrayToDocx(figureArray, "Figure.docx", id);
+
+      const folderUrl = `/output/${id}/`;
+      const [rows_effected] = await db.execute(
+        'INSERT INTO final_document (row_doc_id, user_id, final_doc_size, final_doc_url, status, creation_date) VALUES (?, ?, ?, ?, ?, NOW())',
+        [id, 1, 10000, folderUrl, 1]
+      );
 
     } catch (err) {
       console.error('Error reading .docx file:', err);

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation'
 import { CgProfile } from "react-icons/cg";
+import Link from 'next/link';
 
 
 const Login = () => {
@@ -33,6 +34,8 @@ const Login = () => {
       console.log(data)
       if (data.success) {
         localStorage.setItem('access_token', data.accessToken);
+        localStorage.setItem('name', data.name);
+        localStorage.setItem('email', data.email);
         router.push('/dashboard');
       } else {
         console.log(data.message);
@@ -62,10 +65,9 @@ const Login = () => {
 
         <h2 className="text-center text-2xl font-bold mb-2">Log in</h2>
 
-        <p className="text-center text-xs mb-4">
+        {/* <p className="text-center text-xs mb-4">
           Don&apos;t have an account? <a href="/signup" className="underline">Sign up</a>
-        </p>
-
+        </p> */}
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm">Your email</label>
           <input
@@ -97,11 +99,13 @@ const Login = () => {
           </span>
         </div>
 
-        <p className="text-sm mb-4 cursor-pointer text-right underline">
-          Forgot your password?
-        </p>
+        {/* <p className="text-sm mb-4 cursor-pointer text-right underline">
+          <Link href="/change-password">
+            Forgot your password?
+          </Link>
+        </p> */}
 
-        <button className="w-full bg-custom-green hover:bg-green-500 text-white text-sm py-2 rounded-xl" onClick={handleLogin}>
+        <button className="w-full bg-custom-green hover:bg-green-500 text-white text-sm py-2 rounded-xl mt-2" onClick={handleLogin}>
           Log in
         </button>
         {errorMessage && (

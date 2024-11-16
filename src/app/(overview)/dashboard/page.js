@@ -11,7 +11,7 @@ const Card = ({ icon, text }) => (
 
 const Page = () => {
   return (
-      <div className="p-6 rounded-lg w-full max-w-4xl mx-auto">
+      <div className="px-2 py-6 rounded-lg w-full max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold mb-6 text-left text-white">Dashboard</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

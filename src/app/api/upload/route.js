@@ -4,11 +4,13 @@ import path from 'path';
 import db from '../../../../lib/db';
 import mammoth from 'mammoth';
 import jwt from 'jsonwebtoken';
+const WordExtractor = require('word-extractor');
 
 export async function POST(request) {
   const token = request.headers.get('authorization').split(' ')[1];
 
   const formData = await request.formData();
+
   const file = formData.get('file');
   const fileName = formData.get('name');
   const fileType = formData.get('type');
@@ -38,10 +40,13 @@ export async function POST(request) {
     const [insertId] = await db.execute(
       'SELECT LAST_INSERT_ID() AS last_inserted_id'
     );
-    console.log(insertId)
 
-    const uint8Array = new Uint8Array(fileBuffer);
-    const { value: text } = await mammoth.extractRawText({ buffer: uint8Array });
+    const extractor = new WordExtractor();
+    const extracted = await extractor.extract(filePath);
+    const text = extracted.getBody();
+
+    // const uint8Array = new Uint8Array(fileBuffer);
+    // const { value: text } = await mammoth.extractRawText({ buffer: uint8Array });
     const characters = text.length;
     const words = text.split(/\s+/).length;
     const lines = text.split('\n').length;

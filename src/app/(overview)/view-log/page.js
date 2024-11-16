@@ -1,6 +1,27 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 
 const Page = () => {
+  const [fileName, setFileName] = useState([]);
+
+  useEffect(() => {
+    const fetchFileNames = async () => {
+      try {
+        const response = await fetch('/api/raw-document-name');
+        if (!response.ok) {
+          throw new Error('Failed to fetch filenames');
+        }
+        const data = await response.json();
+        console.log(data)
+        setFileName(data.name);
+      } catch (error) {
+        console.error('Error fetching filenames:', error);
+      }
+    };
+
+    fetchFileNames();
+  }, []);
+
   return (
     <div className="p-6 w-full max-w-4xl mx-auto">
 
@@ -35,10 +56,34 @@ const Page = () => {
                 <th className="py-2 px-4 border">Download File</th>
                 <th className="py-2 px-4 border">Download</th>
                 <th className="py-2 px-4 border">Email</th>
+                <th className="py-2 px-4 border">Creation Date</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+
+              {fileName.map((name, index) => (
+                <tr key={index}>
+                  <td className="py-2 px-4 border text-center">{index + 1}</td>
+                  <td className="py-2 px-4 border">{name.row_doc_name}</td>
+                  <td className="py-2 px-4 border text-center">Completed</td>
+                  <td className="py-2 px-4 border text-center">Completed</td>
+                  <td className="py-2 px-4 border text-center">
+                    <button className="text-blue-500 hover:underline">Download</button>
+                  </td>
+
+                  <td className="py-2 px-4 border text-center">
+                    <button className="text-blue-500 hover:underline">Send Email</button>
+                  </td>
+                  <td className="py-2 px-4 border text-center">{name.creation_date.slice(0,10)}</td>
+                </tr>
+              ))}
+
+
+
+
+
+
+              {/* <tr>
                 <td className="py-2 px-4 border text-center">1</td>
                 <td className="py-2 px-4 border">SampleFile1.docx</td>
                 <td className="py-2 px-4 border text-center">Completed</td>
@@ -50,8 +95,7 @@ const Page = () => {
                 <td className="py-2 px-4 border text-center">
                   <button className="text-blue-500 hover:underline">Send Email</button>
                 </td>
-              </tr>
-              {/* Additional Rows */}
+              </tr> */}
             </tbody>
           </table>
         </div>
