@@ -3,7 +3,7 @@ import db from '../../../../lib/db';
 
 export async function GET(request) {
   try{
-    const [rows] = await db.query('select row_doc_name, creation_date from row_document')
+    const [rows] = await db.query('select * from row_document')
     console.log(rows);
     return NextResponse.json({name:rows})
   }catch(errro){

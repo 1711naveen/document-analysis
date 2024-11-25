@@ -1,30 +1,39 @@
 import path from 'path';
 import fs from 'fs';
 import db from '../../../../lib/db';
+import AdmZip from 'adm-zip';
 
 export async function GET(req) {
   const url = new URL(req.url);
   const final_doc_id = url.searchParams.get('final_doc_id');
-
-  // Retrieve file information based on final_doc_id from the database
   const fileData = await getFileDataFromDatabase(final_doc_id);
 
   if (!fileData) {
     return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
   }
 
-  const filePath = path.join(process.cwd(), fileData.final_doc_url);
+  const folderPath = path.join(process.cwd(), fileData.final_doc_url);
+  console.log(folderPath)
 
-  if (fs.existsSync(filePath)) {
-    const fileStream = fs.createReadStream(filePath);
-    return new Response(fileStream, {
+  if (fs.existsSync(folderPath)) {
+    const zip = new AdmZip();
+
+    const files = fs.readdirSync(folderPath);
+    files.forEach((file) => {
+      const filePath = path.join(folderPath, file);
+      zip.addLocalFile(filePath);
+    });
+
+    const zipBuffer = zip.toBuffer();
+
+    return new Response(zipBuffer, {
       headers: {
-        'Content-Disposition': `attachment; filename="${path.basename(filePath)}"`,
-        'Content-Type': 'application/octet-stream',
+        'Content-Disposition': `attachment; filename="files_${final_doc_id}.zip"`,
+        'Content-Type': 'application/zip',
       },
     });
   } else {
-    return new Response(JSON.stringify({ error: 'File not found' }), { status: 404 });
+    return new Response(JSON.stringify({ error: 'Folder not found' }), { status: 404 });
   }
 }
 

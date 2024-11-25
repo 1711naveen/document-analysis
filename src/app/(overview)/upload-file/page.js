@@ -12,7 +12,21 @@ const Page = () => {
   const [error, setError] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const [docId, setDocId] = useState();
+  const [language, setLanguage] = useState('');
+  const [step, setStep] = useState(1);
 
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
+
+  const handleNextClick = () => {
+    if (!language) {
+      setError('Please select a language to proceed.');
+      return;
+    }
+    setError('');
+    setStep(2);
+  };
 
   const handleFileUploadClick = () => {
     fileInputRef.current.click();
@@ -39,7 +53,6 @@ const Page = () => {
         return;
       }
     }
-
 
     const formData = new FormData();
     formData.append('file', droppedFile);
@@ -114,7 +127,7 @@ const Page = () => {
     <div className="p-6 w-full max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Upload File</h1>
       <div className="flex bg-light-background rounded-lg mt-4 py-8">
-        <div className="flex-1 p-4 mr-4 border-r">
+        {/* <div className="flex-1 p-4 mr-4 border-r">
           {error && <p className='text-white text-center pb-4'>{error}</p>}
           <div className="flex flex-col items-center">
             {
@@ -124,7 +137,7 @@ const Page = () => {
                   onClick={handleFileUploadClick}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
-                  className='flex items-center justify-center w-64 h-32 border rounded-lg cursor-pointer'>
+                  className='flex items-center justify-center w-72 h-48 border rounded-lg cursor-pointer'>
                   <FiUpload className="text-6xl mb-2" />
                 </div>
                 :
@@ -132,7 +145,7 @@ const Page = () => {
                   onClick={handleFileUploadClick}
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
-                  className='flex flex-col items-center justify-center w-64 h-32 border rounded-lg cursor-pointer'
+                  className='flex flex-col items-center justify-center w-72 h-48 border rounded-lg cursor-pointer'
                 >
                   <p className='text-lg font-semibold text-center'>
                     {files.name}
@@ -144,7 +157,7 @@ const Page = () => {
             }
 
             <div className='my-6'>
-              <p className='text-center'>Drag or Drop File</p>
+              <p className='text-center'>Drag and Drop File</p>
               <p className='text-center'>or</p>
             </div>
             <button
@@ -160,6 +173,153 @@ const Page = () => {
               onChange={handleFileUpload}
             />
           </div>
+        </div> */}
+
+        {/* <div className="flex-1 p-4 mr-4 border-r">
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2 text-center" htmlFor="language">
+              Select Document Language:
+            </label>
+            <select
+              id="language"
+              className="w-full p-2 border rounded outline-none bg-light-background"
+              value={language}
+              onChange={handleLanguageChange}
+            >
+              <option value="">-- Select Language --</option>
+              <option value="en">English-US</option>
+              <option value="es">English-UK</option>
+            </select>
+          </div>
+
+          {language && (
+            <div className="flex-1 p-4 mr-4 border-r">
+              {error && <p className="text-white text-center pb-4">{error}</p>}
+              <div className="flex flex-col items-center">
+                {files.length === 0 ? (
+                  <div
+                    onClick={handleFileUploadClick}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="flex items-center justify-center w-72 h-48 border rounded-lg cursor-pointer"
+                  >
+                    <FiUpload className="text-6xl mb-2" />
+                  </div>
+                ) : (
+                  <div
+                    onClick={handleFileUploadClick}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="flex flex-col items-center justify-center w-72 h-48 border rounded-lg cursor-pointer"
+                  >
+                    <p className="text-lg font-semibold text-center">
+                      {files.name}
+                    </p>
+                    <p className="text-sm text-gray-500 text-center">
+                      {parseFloat(files.size / 1024).toFixed(2)} KB
+                    </p>
+                  </div>
+                )}
+
+                <div className="my-6">
+                  <p className="text-center">Drag and Drop File</p>
+                  <p className="text-center">or</p>
+                </div>
+                <button
+                  onClick={handleFileUploadClick}
+                  className="bg-custom-green hover:bg-green-500 text-white py-2 px-4 rounded"
+                >
+                  BROWSE
+                </button>
+                <input
+                  type="file"
+                  accept=".doc,.docx"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleFileUpload}
+                />
+              </div>
+            </div>
+          )}
+        </div> */}
+        <div className="flex-1 p-4 mr-4 border-r">
+          {step === 1 && (
+            <div className="mb-4">
+              <label
+                className="block text-sm font-medium mb-2 text-center"
+                htmlFor="language"
+              >
+                Select Document Language:
+              </label>
+              <select
+                id="language"
+                className="w-full p-2 border rounded outline-none bg-light-background"
+                value={language}
+                onChange={handleLanguageChange}
+              >
+                <option value="">-- Select Language --</option>
+                <option value="en">English-US</option>
+                <option value="es">English-UK</option>
+              </select>
+              {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+              <button
+                onClick={handleNextClick}
+                className="mt-4 bg-custom-green hover:bg-green-500 text-white py-2 px-4 rounded w-full"
+              >
+                Next
+              </button>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="flex-1 p-4 mr-4">
+              {error && <p className="text-white text-center pb-4">{error}</p>}
+              <div className="flex flex-col items-center">
+                {files.length === 0 ? (
+                  <div
+                    onClick={handleFileUploadClick}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="flex items-center justify-center w-80 h-52 border rounded-lg cursor-pointer"
+                  >
+                    <FiUpload className="text-6xl mb-2" />
+                  </div>
+                ) : (
+                  <div
+                    onClick={handleFileUploadClick}
+                    onDragOver={handleDragOver}
+                    onDrop={handleDrop}
+                    className="flex flex-col items-center justify-center w-80 h-52 border rounded-lg cursor-pointer"
+                  >
+                    <p className="text-lg font-semibold text-center">
+                      {files.name}
+                    </p>
+                    <p className="text-sm text-gray-500 text-center">
+                      {parseFloat(files.size / 1024).toFixed(2)} KB
+                    </p>
+                  </div>
+                )}
+
+                <div className="my-6">
+                  <p className="text-center">Drag and Drop File</p>
+                  <p className="text-center">or</p>
+                </div>
+                <button
+                  onClick={handleFileUploadClick}
+                  className="bg-custom-green hover:bg-green-500 text-white py-2 px-4 rounded"
+                >
+                  BROWSE
+                </button>
+                <input
+                  type="file"
+                  accept=".doc,.docx"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleFileUpload}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="flex-1 p-4 ">
@@ -219,7 +379,26 @@ const Page = () => {
           </ul>
           <Link href={{ pathname: "/automation", query: { doc_id: docId } }} >
             <div className="flex justify-end mt-6 ">
-              <button className=" text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white">NEXT</button>
+              <>
+                {Object.keys(fileData).length === 0 ? (
+                  <>
+                    <button
+                      data-tooltip-target="Upload File"
+                      className="text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white cursor-not-allowed"
+                      disabled
+                    >
+                      NEXT
+                    </button>
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100">
+                      Button is disabled
+                    </div>
+                  </>
+                ) : (
+                  <button className="text-white hover:bg-custom-green px-6 py-2 rounded-md border border-white">
+                    NEXT
+                  </button>
+                )}
+              </>
             </div>
           </Link>
         </div>

@@ -10,7 +10,7 @@ import Link from 'next/link';
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('admin@demo.com');
-  const [password, setPassword] = useState('12345');
+  const [password, setPassword] = useState('123456');
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
@@ -99,15 +99,16 @@ const Login = () => {
           </span>
         </div>
 
-        {/* <p className="text-sm mb-4 cursor-pointer text-right underline">
-          <Link href="/change-password">
+        <p className="text-sm mb-4 cursor-pointer text-right underline">
+          <Link href="/forgot-password">
             Forgot your password?
           </Link>
-        </p> */}
+        </p>
 
         <button className="w-full bg-custom-green hover:bg-green-500 text-white text-sm py-2 rounded-xl mt-2" onClick={handleLogin}>
           Log in
         </button>
+
         {errorMessage && (
           <div className="mt-4 text-red-500">
             {errorMessage}

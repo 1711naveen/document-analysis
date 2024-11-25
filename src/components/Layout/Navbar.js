@@ -7,12 +7,15 @@ import Link from 'next/link';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
   useEffect(() => {
+    const name = localStorage.getItem('name')
+    setName(name);
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -24,7 +27,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-background text-white">
+    <nav className="flex justify-between items-center p-4 bg-background text-white border-b-2">
       {/* <div className="text-xl font-bold">
         Documents Analysis Tool
       </div> */}
@@ -48,10 +51,9 @@ const Navbar = () => {
           <FiMenu className="text-2xl" />
           <div className="group">
             <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent transition-all duration-300 group-hover:bg-[200%_200%] group-hover:animate-gradient">
-              Menu
+              {name}
             </span>
           </div>
-
         </button>
       </div>
 

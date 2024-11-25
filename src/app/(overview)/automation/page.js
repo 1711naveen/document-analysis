@@ -2,16 +2,31 @@
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 const Page = () => {
   const searchParams = useSearchParams()
-  const docId = searchParams.get('doc_id')
-  // const {id} = router.query
+  const docId = searchParams.get('doc_id');
+  const [processState, setProcessState] = useState('idle');
+  const [loading, setLoading] = useState(false);
 
   const handleAutomation = async () => {
-    const response = await fetch(`/api/process?doc_id=${docId}`);
-    console.log(response)
-  }
+    setProcessState('loading');
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/process?doc_id=${docId}`);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      if (response.ok) {
+        setProcessState('success');
+      } else {
+        setProcessState('error');
+      }
+      setLoading(false);
+    } catch {
+      setProcessState('error');
+      setLoading(false);
+    }
+  };
 
   const handleStart = () => {
     handleAutomation();
@@ -24,57 +39,196 @@ const Page = () => {
       <div className="flex flex-col items-center p-8 bg-light-background rounded-lg my-6">
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
-              <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processState === 'idle' && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  1
+                </p>
+              )}
+              {processState === 'loading' && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
+                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {processState === 'success' && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
             </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">Process 1</p>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              Table & Figures
+            </p>
+            <div className='mt-2'>
+              <button
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                onClick={handleStart}
+                disabled={processState === "loading"}
+              >
+                {processState === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
-          <div className="w-full h-0.5 bg-gray-300 -mt-14"></div>
+
+          <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
-              <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processState === 'idle' && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  2
+                </p>
+              )}
+              {processState === 'loading' && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
+                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {processState === 'success' && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
             </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">Process 1</p>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              Process 2
+            </p>
+            <div className='mt-2'>
+              <button
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                onClick={handleStart}
+                disabled={processState === "loading"}
+              >
+                {processState === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
-          <div className="w-full h-0.5 bg-gray-300 -mt-14"></div>
+          <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
-              <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processState === 'idle' && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  3
+                </p>
+              )}
+              {processState === 'loading' && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
+                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {processState === 'success' && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
             </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">Process 1</p>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              Process 3
+            </p>
+            <div className='mt-2'>
+              <button
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                onClick={handleStart}
+                disabled={processState === "loading"}
+              >
+                {processState === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
-          <div className="w-full h-0.5 bg-gray-300 -mt-14"></div>
+          <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
-              <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processState === 'idle' && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  4
+                </p>
+              )}
+              {processState === 'loading' && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
+                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {processState === 'success' && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
             </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">Process 1</p>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              Process 4
+            </p>
+            <div className='mt-2'>
+              <button
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                onClick={handleStart}
+                disabled={processState === "loading"}
+              >
+                {processState === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
-          <div className="w-full h-0.5 bg-gray-300 -mt-14"></div>
+          <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
           <div className="flex flex-col items-center">
-            <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
-              <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processState === 'idle' && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  5
+                </p>
+              )}
+              {processState === 'loading' && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
+                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              {processState === 'success' && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
             </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">Process 1</p>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              Process 5
+            </p>
+            <div className='mt-2'>
+              <button
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                onClick={handleStart}
+                disabled={processState === "loading"}
+              >
+                {processState === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
         </div>
         <div className="mt-6 text-center">
-          <h3 className="text-2xl font-semibold">File Process....75% Completed</h3>
+          {/* <h3 className="text-2xl font-semibold">File Process....75% Completed</h3> */}
         </div>
-
         <div className="mt-6 flex justify-center space-x-4">
-          <button
-            className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-            onClick={handleStart}
-          >Start</button>
-          {/* <button className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md ">STOP</button> */}
+          {processState !== "success" ? (
+            <div>
+              <div>
+                <button
+                  className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                  onClick={handleStart}
+                  disabled={processState === "loading"}
+                >
+                  {processState === "loading" ? "Processing..." : "Start"}
+                </button>
+              </div>
+
+              {loading && (
+                <div className="flex justify-center align-middle space-x-2">
+                  <img
+                    src="/loading-line.gif"
+                    alt="Loading..."
+                    className="w-16 h-12"
+                  />
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              href={{
+                pathname: "/processed",
+                query: { doc_id: docId },
+              }}
+            >
+              <button className="text-white px-6 py-2 rounded-md border border-white hover:bg-green-500">
+                NEXT
+              </button>
+            </Link>
+          )}
         </div>
 
-        <Link href="/processed">
-          <div className="mt-6">
-            <button className=" text-white px-6 py-2 rounded-md border border-white hover:bg-green-500">NEXT</button>
-          </div>
-        </Link>
       </div>
     </div>
   )

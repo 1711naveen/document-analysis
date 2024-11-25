@@ -4,7 +4,7 @@ import { FiHome, FiUpload, FiFileText } from 'react-icons/fi';
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen flex flex-col items-center p-4 border-r-4 border-red">
+    <div className="w-64 flex flex-col items-center p-4 border-r-4 h-full">
 
       <div className="flex flex-col space-y-4 w-full">
         <Link href="/dashboard">
