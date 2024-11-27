@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { CgProfile } from "react-icons/cg";
 import Link from 'next/link';
 
-
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('admin@demo.com');

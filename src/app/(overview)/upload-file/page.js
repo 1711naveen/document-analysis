@@ -356,7 +356,7 @@ const Page = () => {
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
-                {fileData.characters || '---'}
+                {Math.floor(fileData.characters / 1000) ? `${Math.floor(fileData.characters / 1000)}K` : '---'}
               </div>
               <div className="flex-1">
                 <span className="">Total Characters</span>

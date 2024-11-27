@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="flex justify-center items-center p-4 bg-[#101B36]">
       <span className="text-sm">
-        <FaCopyright className="inline mb-1" /> Documents Analysis Tool, Reserved By NISP
+        <FaCopyright className="inline mb-1" /> Documents Analysis Tool, Reserved By NISPL
       </span>
     </footer>
   )

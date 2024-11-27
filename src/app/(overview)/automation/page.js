@@ -14,7 +14,7 @@ const Page = () => {
     setProcessState('loading');
     setLoading(true);
     try {
-      const response = await fetch(`/api/process?doc_id=${docId}`);
+      const response = await fetch(`/api/process/table?doc_id=${docId}`);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       if (response.ok) {
         setProcessState('success');
@@ -82,7 +82,7 @@ const Page = () => {
                 </div>
               )}
               {processState === 'success' && (
-                <FaCheckCircle className="text-green-500 w-6 h-6" />
+                <FaCheckCircle className="text-green-500 w-6 h-6"/>
               )}
             </div>
             <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
@@ -91,7 +91,6 @@ const Page = () => {
             <div className='mt-2'>
               <button
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={handleStart}
                 disabled={processState === "loading"}
               >
                 {processState === "loading" ? "Processing..." : "Start"}
@@ -121,7 +120,6 @@ const Page = () => {
             <div className='mt-2'>
               <button
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={handleStart}
                 disabled={processState === "loading"}
               >
                 {processState === "loading" ? "Processing..." : "Start"}
@@ -151,7 +149,6 @@ const Page = () => {
             <div className='mt-2'>
               <button
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={handleStart}
                 disabled={processState === "loading"}
               >
                 {processState === "loading" ? "Processing..." : "Start"}
@@ -181,7 +178,6 @@ const Page = () => {
             <div className='mt-2'>
               <button
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={handleStart}
                 disabled={processState === "loading"}
               >
                 {processState === "loading" ? "Processing..." : "Start"}
@@ -198,7 +194,6 @@ const Page = () => {
               <div>
                 <button
                   className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                  onClick={handleStart}
                   disabled={processState === "loading"}
                 >
                   {processState === "loading" ? "Processing..." : "Start"}
