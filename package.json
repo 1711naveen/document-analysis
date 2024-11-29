@@ -11,6 +11,9 @@
   "dependencies": {
     "adm-zip": "^0.5.16",
     "date-fns": "^4.1.0",
+    "dictionary-en": "^4.0.0",
+    "dictionary-en-gb": "^3.0.0",
+    "dictionary-en-us": "^2.2.1",
     "docx": "^9.0.3",
     "docxtemplater": "^3.54.0",
     "jsonwebtoken": "^9.0.2",
@@ -19,6 +22,7 @@
     "mysql2": "^3.11.4",
     "next": "15.0.2",
     "nodemailer": "^6.9.16",
+    "nspell": "^2.1.5",
     "pizzip": "^3.1.7",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
