@@ -4,7 +4,10 @@ import path from 'path';
 import db from '../../../../lib/db';
 import mammoth from 'mammoth';
 import jwt from 'jsonwebtoken';
+// import { promises as fs } from 'fs';
+import JSZip from 'jszip';
 const WordExtractor = require('word-extractor');
+import { XMLParser } from 'fast-xml-parser';
 
 export async function POST(request) {
   const token = request.headers.get('authorization').split(' ')[1];
@@ -21,6 +24,17 @@ export async function POST(request) {
   }
   const filePath = path.join(process.cwd(), 'files', fileName);
   const fileBuffer = await file.arrayBuffer();
+
+  const zip = await JSZip.loadAsync(fileBuffer);
+  const appXml = await zip.file('docProps/app.xml').async('string');
+  const parser = new XMLParser();
+  const parsedXml = parser.parse(appXml);
+  const properties = {
+    pages: parsedXml?.Properties?.Pages || null,
+    characters: parsedXml?.Properties?.Characters || null,
+    lines: parsedXml?.Properties?.Lines || null,
+    words: parsedXml?.Properties?.Words || null,
+  };
 
   if (!fs.existsSync(path.join(process.cwd(), 'files'))) {
     fs.mkdirSync(path.join(process.cwd(), 'files'));
@@ -47,10 +61,15 @@ export async function POST(request) {
 
     // const uint8Array = new Uint8Array(fileBuffer);
     // const { value: text } = await mammoth.extractRawText({ buffer: uint8Array });
-    const characters = text.length;
+    // const characters = text.length;
     const words = text.split(/\s+/).length;
-    const lines = text.split('\n').length;
-    const pages = Math.ceil(words / 300);
+    // const lines = text.split('\n').length;
+    // const pages = Math.ceil(words / 300);
+
+    const characters = properties.characters;
+    // const words = properties.words;
+    const lines = properties.lines;
+    const pages = properties.pages;
 
     return NextResponse.json({ success: true, message: 'File uploaded and saved to database', characters: characters, words: words, lines: lines, pages: pages, doc_id: insertId[0].last_inserted_id });
   } catch (error) {
