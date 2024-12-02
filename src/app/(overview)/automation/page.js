@@ -7,8 +7,33 @@ import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 const Page = () => {
   const searchParams = useSearchParams()
   const docId = searchParams.get('doc_id');
-  const [processState, setProcessState] = useState('idle');
+  const lang = searchParams.get('lang');
+  const [processState, setProcessState] = useState('idle');//Table
+  const [processStatus, setProcessStatus] = useState("idle");//English
   const [loading, setLoading] = useState(false);
+
+  //function to handle english spelling check
+  const handleProcessClick = async () => {
+    if (!lang) return;
+
+    const apiEndpoint =
+      lang === "UK"
+        ? `/api/process/englishcheckUK?doc_id=${docId}`
+        : `/api/process/englishcheckUS?doc_id=${docId}`;
+
+    try {
+      setProcessStatus("loading"); // Update state to loading
+      const response = await fetch(apiEndpoint, { method: "POST" });
+      if (response.ok) {
+        setProcessStatus("success"); // Update state to success
+      } else {
+        throw new Error("Failed to process");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setProcessStatus("error"); // Handle errors
+    }
+  };
 
   const handleAutomation = async () => {
     setProcessState('loading');
@@ -69,7 +94,7 @@ const Page = () => {
           </div>
 
           <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <div className="w-10 h-10 rounded-full flex justify-center items-center">
               {processState === 'idle' && (
                 <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
@@ -86,7 +111,7 @@ const Page = () => {
               )}
             </div>
             <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
-              Process 2
+              US/ UK
             </p>
             <div className='mt-2'>
               <button
@@ -96,7 +121,42 @@ const Page = () => {
                 {processState === "loading" ? "Processing..." : "Start"}
               </button>
             </div>
+          </div> */}
+
+          <div className="flex flex-col items-center">
+            <div className="w-10 h-10 rounded-full flex justify-center items-center">
+              {processStatus === "idle" && (
+                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                  2
+                </p>
+              )}
+              {processStatus === "loading" && (
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
+                  <img
+                    src="/loading.png"
+                    alt="spinner"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
+              {processStatus === "success" && (
+                <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
+            </div>
+            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+              US/ UK
+            </p>
+            <div className="mt-2">
+              <button
+                onClick={handleProcessClick} // Add onClick handler
+                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                disabled={processStatus === "loading"}
+              >
+                {processStatus === "loading" ? "Processing..." : "Start"}
+              </button>
+            </div>
           </div>
+
           <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
           <div className="flex flex-col items-center">
             <div className="w-10 h-10 rounded-full flex justify-center items-center">

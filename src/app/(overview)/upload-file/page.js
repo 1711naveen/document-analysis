@@ -258,8 +258,8 @@ const Page = () => {
                 onChange={handleLanguageChange}
               >
                 <option value="">-- Select Language --</option>
-                <option value="en">English-US</option>
-                <option value="es">English-UK</option>
+                <option value="us">English-US</option>
+                <option value="uk">English-UK</option>
               </select>
               {error && <p className="text-red-500 text-center mt-2">{error}</p>}
               <button
@@ -377,7 +377,12 @@ const Page = () => {
               <RxCross2 className='text-red-500 font-bold' />
             </li>
           </ul>
-          <Link href={{ pathname: "/automation", query: { doc_id: docId } }} >
+          <Link
+            href={{
+              pathname: "/automation",
+              query: { doc_id: docId, lang: language },
+            }}
+          >
             <div className="flex justify-end mt-6 ">
               <>
                 {Object.keys(fileData).length === 0 ? (
