@@ -1,9 +1,9 @@
-import localFont from "next/font/local";
 import Footer from "@/components/Layout/Footer";
 import Navbar from "@/components/Layout/Navbar";
 import Sidebar from "@/components/Layout/Sidebar";
 import ProtectedLayout from "../protected-layout";
 import SidebarToggle from "@/components/Layout/SidebarToggle";
+import { Suspense } from "react";
 
 
 export const metadata = {
@@ -13,16 +13,6 @@ export const metadata = {
 
 export default function DashboardLayou({ children }) {
   return (
-    // <ProtectedLayout>
-    //   <div className="flex flex-col min-h-screen">
-    //     <Navbar />
-    //     <div style={{ display: 'flex' }}>
-    //       <Sidebar />
-    //       <main style={{ flex: 1 }}>{children}</main>
-    //     </div>
-    //     <Footer />
-    //   </div>
-    // </ProtectedLayout>
     <ProtectedLayout>
       <div className="flex flex-col min-h-screen">
         <Navbar />
@@ -30,7 +20,7 @@ export default function DashboardLayou({ children }) {
           <SidebarToggle>
             <Sidebar />
           </SidebarToggle>
-          <main className="transition-all duration-300 flex-grow">{children}</main>
+          <main className="transition-all duration-300 flex-grow"><Suspense>{children}</Suspense></main>
         </div>
         <Footer />
       </div>
