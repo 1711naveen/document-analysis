@@ -23,7 +23,7 @@ const Page = () => {
 
     try {
       setProcessStatus("loading"); // Update state to loading
-      const response = await fetch(apiEndpoint, { method: "POST" });
+      const response = await fetch(apiEndpoint);
       if (response.ok) {
         setProcessStatus("success"); // Update state to success
       } else {
@@ -148,7 +148,7 @@ const Page = () => {
             </p>
             <div className="mt-2">
               <button
-                onClick={handleProcessClick} // Add onClick handler
+                onClick={handleProcessClick}
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
                 disabled={processStatus === "loading"}
               >

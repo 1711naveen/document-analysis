@@ -140,6 +140,9 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import { NextResponse } from 'next/server';
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
+import db from '../../../../../lib/db';
+import fs from 'fs'
+const WordExtractor = require('word-extractor');
 
 const cleanWord = (word) => {
   const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
@@ -171,16 +174,26 @@ const processXmlContent = (node, spell) => {
   return node;
 };
 
-export async function POST(req) {
+export async function GET(req) {
   const url = new URL(req.url);
   const id = url.searchParams.get('doc_id');
   console.log(id);
 
-  const formData = await req.formData();
-  const file = formData.get('file');
-  const buffer = await file.arrayBuffer();
+  // const formData = await req.formData();
+  // const file = formData.get('file');
+  // const buffer = await file.arrayBuffer();
 
   try {
+
+    const [rows] = await db.query(
+      'SELECT * FROM row_document WHERE row_doc_id = ? ',
+      [id]
+    );
+    console.log(rows);
+    const filePath = path.join(process.cwd(), rows[0].row_doc_url);
+    console.log(filePath);
+    const buffer = fs.readFileSync(filePath);
+
     const affPath = path.resolve('node_modules/dictionary-en-us/index.aff');
     const dicPath = path.resolve('node_modules/dictionary-en-us/index.dic');
 
@@ -190,7 +203,6 @@ export async function POST(req) {
     ]);
 
     const spell = nspell(aff, dic);
-
     const zip = await JSZip.loadAsync(buffer);
     const documentXml = await zip.file('word/document.xml').async('string');
 
