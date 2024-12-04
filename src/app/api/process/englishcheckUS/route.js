@@ -151,6 +151,7 @@ const cleanWord = (word) => {
 
 const processXmlContent = (node, spell) => {
   if (typeof node === 'string') {
+    // console.log("String type called")
     return node
       .split(/\s+/)
       .map((word) => {
@@ -166,13 +167,43 @@ const processXmlContent = (node, spell) => {
   }
 
   if (typeof node === 'object') {
+    // console.log("Object type called")
     for (let key in node) {
       node[key] = processXmlContent(node[key], spell);
     }
   }
-
   return node;
 };
+
+// const processXmlContent = (node, spell) => {
+//   if (typeof node === 'string') {
+//     console.log("String type called");
+//     return node
+//       .split(/\s+/)
+//       .map((word) => {
+//         const cleaned = cleanWord(word);
+//         if (cleaned && !spell.check(cleaned)) {
+//           const suggestions = spell.suggest(cleaned);
+//           const correction = suggestions[0] || cleaned;
+//           return word.replace(cleaned, correction);
+//         }
+//         return word;
+//       })
+//       .join(' ');
+//   }
+
+//   if (typeof node === 'object' && node !== null) {
+//     console.log("Object type called");
+//     for (let key in node) {
+//       if (node.hasOwnProperty(key)) {
+//         node[key] = processXmlContent(node[key], spell);
+//       }
+//     }
+//   }
+
+//   return node;
+// };
+
 
 export async function GET(req) {
   const url = new URL(req.url);
@@ -218,6 +249,9 @@ export async function GET(req) {
     const xmlData = parser.parse(documentXml);
 
     // Process and correct content
+    console.log("xmlData")
+    console.log(typeof xmlData);
+    // return
     const correctedXmlData = processXmlContent(xmlData, spell);
 
     // Build updated XML content
