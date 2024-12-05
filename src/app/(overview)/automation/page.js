@@ -9,7 +9,7 @@ const Page = () => {
   const docId = searchParams.get('doc_id');
   const lang = searchParams.get('lang');
   const [processState, setProcessState] = useState('idle');//Table
-  const [processStatus, setProcessStatus] = useState("idle");//English
+  const [processState1, setProcessState1] = useState("idle");//English
   const [loading, setLoading] = useState(false);
 
   //function to handle english spelling check
@@ -22,16 +22,16 @@ const Page = () => {
         : `/api/process/englishcheckUS?doc_id=${docId}`;
 
     try {
-      setProcessStatus("loading"); // Update state to loading
+      setProcessState1("loading"); // Update state to loading
       const response = await fetch(apiEndpoint);
       if (response.ok) {
-        setProcessStatus("success"); // Update state to success
+        setProcessState1("success"); // Update state to success
       } else {
         throw new Error("Failed to process");
       }
     } catch (error) {
       console.error("Error:", error);
-      setProcessStatus("error"); // Handle errors
+      setProcessState1("error"); // Handle errors
     }
   };
 
@@ -125,12 +125,12 @@ const Page = () => {
 
           <div className="flex flex-col items-center">
             <div className="w-10 h-10 rounded-full flex justify-center items-center">
-              {processStatus === "idle" && (
+              {processState1 === "idle" && (
                 <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
                   2
                 </p>
               )}
-              {processStatus === "loading" && (
+              {processState1 === "loading" && (
                 <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
                   <img
                     src="/loading.png"
@@ -139,8 +139,11 @@ const Page = () => {
                   />
                 </div>
               )}
-              {processStatus === "success" && (
+              {processState1 === "success" && (
                 <FaCheckCircle className="text-green-500 w-6 h-6" />
+              )}
+              {processState1 === "error" && (
+                <FaTimesCircle className="text-red-500 w-6 h-6" />
               )}
             </div>
             <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
@@ -150,9 +153,9 @@ const Page = () => {
               <button
                 onClick={handleProcessClick}
                 className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                disabled={processStatus === "loading"}
+                disabled={processState1 === "loading"}
               >
-                {processStatus === "loading" ? "Processing..." : "Start"}
+                {processState1 === "loading" ? "Processing..." : "Start"}
               </button>
             </div>
           </div>
@@ -249,7 +252,7 @@ const Page = () => {
           {/* <h3 className="text-2xl font-semibold">File Process....75% Completed</h3> */}
         </div>
         <div className="mt-6 flex justify-center space-x-4">
-          {processState !== "success" ? (
+          {(processState !== "success" || processState1 !== 'success') ? (
             <div>
               <div>
                 <button

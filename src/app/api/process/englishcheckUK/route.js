@@ -242,8 +242,9 @@ import db from '../../../../../lib/db';
 import fs from 'fs'
 
 const cleanWord = (word) => {
-  const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
-  return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
+  const lowerCaseWord = word.toLowerCase();
+  const cleaned = lowerCaseWord.replace(/^[^a-z']+|[^a-z']+$/g, '');
+  return /^[a-z']+$/.test(cleaned) ? cleaned : '';
 };
 
 const processXmlContent = (node, spell) => {
@@ -275,10 +276,6 @@ export async function GET(req) {
   const url = new URL(req.url);
   const id = url.searchParams.get('doc_id');
   console.log(id);
-
-  // const formData = await req.formData();
-  // const file = formData.get('file');
-  // const buffer = await file.arrayBuffer();
 
   try {
 

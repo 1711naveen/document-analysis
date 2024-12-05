@@ -144,11 +144,6 @@ import db from '../../../../../lib/db';
 import fs from 'fs'
 const WordExtractor = require('word-extractor');
 
-// const cleanWord = (word) => {
-//   const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
-//   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
-// };
-
 const cleanWord = (word) => {
   const lowerCaseWord = word.toLowerCase();
   const cleaned = lowerCaseWord.replace(/^[^a-z']+|[^a-z']+$/g, '');
@@ -219,12 +214,7 @@ export async function GET(req) {
   const id = url.searchParams.get('doc_id');
   console.log(id);
 
-  // const formData = await req.formData();
-  // const file = formData.get('file');
-  // const buffer = await file.arrayBuffer();
-
   try {
-
     const [rows] = await db.query(
       'SELECT * FROM row_document WHERE row_doc_id = ? ',
       [id]
