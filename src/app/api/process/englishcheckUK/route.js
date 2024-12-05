@@ -271,7 +271,7 @@ const processXmlContent = (node, spell) => {
   return node;
 };
 
-export async function POST(req) {
+export async function GET(req) {
   const url = new URL(req.url);
   const id = url.searchParams.get('doc_id');
   console.log(id);

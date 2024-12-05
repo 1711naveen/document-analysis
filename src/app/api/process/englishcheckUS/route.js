@@ -144,14 +144,19 @@ import db from '../../../../../lib/db';
 import fs from 'fs'
 const WordExtractor = require('word-extractor');
 
+// const cleanWord = (word) => {
+//   const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
+//   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
+// };
+
 const cleanWord = (word) => {
-  const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
-  return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
+  const lowerCaseWord = word.toLowerCase();
+  const cleaned = lowerCaseWord.replace(/^[^a-z']+|[^a-z']+$/g, '');
+  return /^[a-z']+$/.test(cleaned) ? cleaned : '';
 };
 
 const processXmlContent = (node, spell) => {
   if (typeof node === 'string') {
-    // console.log("String type called")
     return node
       .split(/\s+/)
       .map((word) => {
@@ -167,7 +172,6 @@ const processXmlContent = (node, spell) => {
   }
 
   if (typeof node === 'object') {
-    // console.log("Object type called")
     for (let key in node) {
       node[key] = processXmlContent(node[key], spell);
     }
@@ -175,14 +179,22 @@ const processXmlContent = (node, spell) => {
   return node;
 };
 
+// const cleanWord = (word) => {
+//   const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
+//   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
+// };
+
 // const processXmlContent = (node, spell) => {
 //   if (typeof node === 'string') {
-//     console.log("String type called");
 //     return node
 //       .split(/\s+/)
 //       .map((word) => {
+//         // if ((word.startsWith("'") && word.endsWith("'")) || (word.startsWith('"') && word.endsWith('"'))) {
+//         //   return word;
+//         // }
+
 //         const cleaned = cleanWord(word);
-//         if (cleaned && !spell.check(cleaned)) {
+//         if (cleaned && !spell.correct(cleaned)) {
 //           const suggestions = spell.suggest(cleaned);
 //           const correction = suggestions[0] || cleaned;
 //           return word.replace(cleaned, correction);
@@ -192,17 +204,14 @@ const processXmlContent = (node, spell) => {
 //       .join(' ');
 //   }
 
-//   if (typeof node === 'object' && node !== null) {
-//     console.log("Object type called");
+//   if (typeof node === 'object') {
 //     for (let key in node) {
-//       if (node.hasOwnProperty(key)) {
-//         node[key] = processXmlContent(node[key], spell);
-//       }
+//       node[key] = processXmlContent(node[key], spell);
 //     }
 //   }
-
 //   return node;
 // };
+
 
 
 export async function GET(req) {
