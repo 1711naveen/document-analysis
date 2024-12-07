@@ -10,7 +10,7 @@ const Page = () => {
   const lang = searchParams.get('lang');
   const isChecked = searchParams.get('isChecked');
   const [processState, setProcessState] = useState('idle');//Table
-  const [processState1, setProcessState1] = useState("idle");//English
+  const [processState1, setProcessState1] = useState("idle");//Spelling Mistake
   const [loading, setLoading] = useState(false);
 
   //function to handle english spelling check
@@ -61,7 +61,11 @@ const Page = () => {
 
   return (
     <div className="p-6 w-full mx-auto">
-      <h2 className="text-3xl font-bold mb-6 ">Automation</h2>
+      {/* <h2 className="text-3xl font-bold mb-6 ">Automation</h2> */}
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Upload File</h1>
+        {<span className="text-xl">Selected Language: {lang.toUpperCase()}</span>}
+      </div>
       <div className="flex flex-col items-center p-8 bg-light-background rounded-lg my-6">
         <div className="flex items-center justify-between w-full">
           {/* This div is for showing table and figures */}
@@ -97,39 +101,42 @@ const Page = () => {
           <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>*/}
 
           {isChecked && (
-            <div className="flex flex-col items-center">
-              <div className="w-10 h-10 rounded-full flex justify-center items-center">
-                {processState === 'idle' && (
-                  <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
-                    1
-                  </p>
-                )}
-                {processState === 'loading' && (
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
-                    <img
-                      src="/loading.png"
-                      alt="spinner"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-                {processState === 'success' && (
-                  <FaCheckCircle className="text-green-500 w-6 h-6" />
-                )}
+            <>
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 rounded-full flex justify-center items-center">
+                  {processState === 'idle' && (
+                    <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
+                      1
+                    </p>
+                  )}
+                  {processState === 'loading' && (
+                    <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden">
+                      <img
+                        src="/loading.png"
+                        alt="spinner"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  {processState === 'success' && (
+                    <FaCheckCircle className="text-green-500 w-6 h-6" />
+                  )}
+                </div>
+                <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
+                  Table & Figures
+                </p>
+                <div className="mt-2">
+                  <button
+                    className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
+                    onClick={handleStart}
+                    disabled={processState === 'loading'}
+                  >
+                    {processState === 'loading' ? 'Processing...' : 'Start'}
+                  </button>
+                </div>
               </div>
-              <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
-                Table & Figures
-              </p>
-              <div className="mt-2">
-                <button
-                  className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                  onClick={handleStart}
-                  disabled={processState === 'loading'}
-                >
-                  {processState === 'loading' ? 'Processing...' : 'Start'}
-                </button>
-              </div>
-            </div>
+              <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>
+            </>
           )}
 
           <div className="flex flex-col items-center">
@@ -167,7 +174,7 @@ const Page = () => {
                 {processState1 === "loading" ? "Processing..." : "Start"}
               </button>
             </div> */}
-            
+
             <div className="mt-2">
               <button
                 onClick={handleProcessClick}

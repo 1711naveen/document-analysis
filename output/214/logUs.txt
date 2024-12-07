@@ -1,0 +1,29 @@
+Line 3: Organisational,   Suggestions: organizational
+Line 3: Behaviour:,   Suggestions: behavior
+Line 5: Organisational,   Suggestions: organizational
+Line 5: behaviour,   Suggestions: behavior
+Line 5: profesional,   Suggestions: professional
+Line 5: organisational,   Suggestions: organizational
+Line 5: noances,   Suggestions: nuances
+Line 5: behaviour,   Suggestions: behavior
+Line 5: organisational,   Suggestions: organizational
+Line 5: organisational,   Suggestions: organizational
+Line 5: behaviour,,   Suggestions: behavior
+Line 5: organisations.,   Suggestions: organizations
+Line 9: Organisational,   Suggestions: organizational
+Line 9: Behaviour,   Suggestions: behavior
+Line 11: Organisational,   Suggestions: organizational
+Line 11: behaviour,   Suggestions: behavior
+Line 11: organisational,   Suggestions: organizational
+Line 11: 20th,   Suggestions: eh , oh , tb , tn , uh , Th , h , the , tho , thy , T , Ta , Tc , Te , THC , Thu , Ti , Tl , Tm , To , Tr , Ts , Tu , Ty , ah , ch , ht , nth , sh , DH , NH , pH , Rh , TD , TV , TX
+Line 11: organisational,   Suggestions: organizational
+Line 13: organisational,   Suggestions: organizational
+Line 13: behaviour,   Suggestions: behavior
+Line 19: organisations,   Suggestions: organizations
+Line 21: organisational,   Suggestions: organizational
+Line 27: Behaviour,   Suggestions: behavior
+Line 29: behaviour,   Suggestions: behavior
+Line 31: consientiousness,   Suggestions: conscientiousness
+Line 31: openess,   Suggestions: openness , oneness , openers , openest
+Line 33: organisational,   Suggestions: organizational
+Line 35: others',   Suggestions: other's , others

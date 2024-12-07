@@ -287,8 +287,7 @@ const Page = () => {
           <Link
             href={{
               pathname: "/automation",
-              query: { doc_id: docId, lang: language },
-              isChecked: isChecked,
+              query: { doc_id: docId, lang: language, isChecked: isChecked},
             }}
           >
             <div className="flex justify-end mt-6 ">
