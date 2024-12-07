@@ -240,6 +240,7 @@ import { NextResponse } from 'next/server';
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import db from '../../../../../lib/db';
 import fs from 'fs'
+import mammoth from 'mammoth';
 
 const cleanWord = (word) => {
   const lowerCaseWord = word.toLowerCase();
@@ -295,37 +296,62 @@ export async function GET(req) {
     ]);
 
     const spell = nspell(aff, dic);
+    const { value: text } = await mammoth.extractRawText({ buffer });
+    const lines = text.split('\n');
+    const logData = [];
+    let lineCounter = 0;
 
-    const zip = await JSZip.loadAsync(buffer);
-    const documentXml = await zip.file('word/document.xml').async('string');
+    lines.forEach((line, index) => {
+      const words = line.split(/\s+/);
+      words.forEach((word) => {
+        const cleaned = cleanWord(word);
+        if (cleaned && !spell.correct(cleaned)) {
+          lineCounter++;
+          const suggestions = spell.suggest(cleaned);
+          const suggestionText = suggestions.length > 0
+            ? ` Suggestions: ${suggestions.join(', ')}`
+            : ' No suggestions available';
+          logData.push(`Line ${index + 1}: ${word},  ${suggestionText}`);
+        }
+      });
+    });
 
-    const parserOptions = {
-      ignoreAttributes: false,
-      parseNodeValue: false,
-      parseAttributeValue: false,
-      trimValues: false,
-    };
+    const outputPathFile = path.join(process.cwd(), 'output', id, 'logUK.txt');
 
-    // Parse XML content
-    const parser = new XMLParser(parserOptions);
-    const xmlData = parser.parse(documentXml);
+    const dir = path.dirname(outputPathFile);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    const logContent = logData.join('\n');
+    await writeFile(outputPathFile, logContent);
 
-    // Process and correct content
-    const correctedXmlData = processXmlContent(xmlData, spell);
+    // const zip = await JSZip.loadAsync(buffer);
+    // const documentXml = await zip.file('word/document.xml').async('string');
 
-    // Build updated XML content
-    const builder = new XMLBuilder(parserOptions);
-    const updatedDocumentXml = builder.build(correctedXmlData);
+    // const parserOptions = {
+    //   ignoreAttributes: false,
+    //   parseNodeValue: false,
+    //   parseAttributeValue: false,
+    //   trimValues: false,
+    // };
 
-    zip.file('word/document.xml', updatedDocumentXml);
-    const updatedDocx = await zip.generateAsync({ type: 'nodebuffer' });
+    // const parser = new XMLParser(parserOptions);
+    // const xmlData = parser.parse(documentXml);
 
-    const outputPath = path.join(process.cwd(), 'output', id, 'corrected_document_uk.docx');
-    await mkdir(path.dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, updatedDocx);
+    // const correctedXmlData = processXmlContent(xmlData, spell);
+
+    // const builder = new XMLBuilder(parserOptions);
+    // const updatedDocumentXml = builder.build(correctedXmlData);
+
+    // zip.file('word/document.xml', updatedDocumentXml);
+    // const updatedDocx = await zip.generateAsync({ type: 'nodebuffer' });
+
+    // const outputPath = path.join(process.cwd(), 'output', id, 'corrected_document_uk.docx');
+    // await mkdir(path.dirname(outputPath), { recursive: true });
+    // await writeFile(outputPath, updatedDocx);
 
     return new NextResponse(
-      JSON.stringify({ message: 'Document corrected and saved', path: outputPath }),
+      JSON.stringify({ message: 'Document corrected and saved', path: outputPathFile }),
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' },

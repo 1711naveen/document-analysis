@@ -143,11 +143,14 @@ import { XMLParser, XMLBuilder } from 'fast-xml-parser';
 import db from '../../../../../lib/db';
 import fs from 'fs'
 const WordExtractor = require('word-extractor');
+import mammoth from 'mammoth';
 
 const cleanWord = (word) => {
-  const lowerCaseWord = word.toLowerCase();
-  const cleaned = lowerCaseWord.replace(/^[^a-z']+|[^a-z']+$/g, '');
-  return /^[a-z']+$/.test(cleaned) ? cleaned : '';
+  const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
+  if (/^\d/.test(cleaned)) {
+    return '';
+  }
+  return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
 };
 
 const processXmlContent = (node, spell) => {
@@ -155,6 +158,9 @@ const processXmlContent = (node, spell) => {
     return node
       .split(/\s+/)
       .map((word) => {
+        if ((word.startsWith("'") && word.endsWith("'")) || (word.startsWith('"') && word.endsWith('"'))) {
+          return word;
+        }
         const cleaned = cleanWord(word);
         if (cleaned && !spell.correct(cleaned)) {
           const suggestions = spell.suggest(cleaned);
@@ -173,40 +179,6 @@ const processXmlContent = (node, spell) => {
   }
   return node;
 };
-
-// const cleanWord = (word) => {
-//   const cleaned = word.replace(/^[^a-zA-Z']+|[^a-zA-Z']+$/g, '').toLowerCase();
-//   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
-// };
-
-// const processXmlContent = (node, spell) => {
-//   if (typeof node === 'string') {
-//     return node
-//       .split(/\s+/)
-//       .map((word) => {
-//         // if ((word.startsWith("'") && word.endsWith("'")) || (word.startsWith('"') && word.endsWith('"'))) {
-//         //   return word;
-//         // }
-
-//         const cleaned = cleanWord(word);
-//         if (cleaned && !spell.correct(cleaned)) {
-//           const suggestions = spell.suggest(cleaned);
-//           const correction = suggestions[0] || cleaned;
-//           return word.replace(cleaned, correction);
-//         }
-//         return word;
-//       })
-//       .join(' ');
-//   }
-
-//   if (typeof node === 'object') {
-//     for (let key in node) {
-//       node[key] = processXmlContent(node[key], spell);
-//     }
-//   }
-//   return node;
-// };
-
 
 
 export async function GET(req) {
@@ -231,11 +203,42 @@ export async function GET(req) {
       readFile(affPath, 'utf-8'),
       readFile(dicPath, 'utf-8'),
     ]);
-
     const spell = nspell(aff, dic);
+
+
+    const { value: text } = await mammoth.extractRawText({ buffer });
+    const lines = text.split('\n');
+    const logData = [];
+    let lineCounter = 0;
+
+    lines.forEach((line, index) => {
+      const words = line.split(/\s+/);
+      words.forEach((word) => {
+        const cleaned = cleanWord(word);
+        if (cleaned && !spell.correct(cleaned)) {
+          lineCounter++;
+          const suggestions = spell.suggest(cleaned);
+          const suggestionText = suggestions.length > 0
+            ? ` Suggestions: ${suggestions.join(' , ')}`
+            : ' No suggestions available';
+          logData.push(`Line ${index + 1}: ${word},  ${suggestionText}`);
+        }
+      });
+    });
+
+    const outputPathFile = path.join(process.cwd(), 'output', id, 'logUs.txt');
+
+    const dir = path.dirname(outputPathFile);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    const logContent = logData.join('\n');
+    await writeFile(outputPathFile, logContent);
+
     const zip = await JSZip.loadAsync(buffer);
     const documentXml = await zip.file('word/document.xml').async('string');
 
+    //commment this for not taking too long time till await writeFile(outputPath, updatedDocx);
     const parserOptions = {
       ignoreAttributes: false,
       parseNodeValue: false,
@@ -243,17 +246,12 @@ export async function GET(req) {
       trimValues: false,
     };
 
-    // Parse XML content
     const parser = new XMLParser(parserOptions);
     const xmlData = parser.parse(documentXml);
+    console.log(xmlData)
 
-    // Process and correct content
-    console.log("xmlData")
-    console.log(typeof xmlData);
-    // return
     const correctedXmlData = processXmlContent(xmlData, spell);
 
-    // Build updated XML content
     const builder = new XMLBuilder(parserOptions);
     const updatedDocumentXml = builder.build(correctedXmlData);
 
@@ -265,7 +263,7 @@ export async function GET(req) {
     await writeFile(outputPath, updatedDocx);
 
     return new NextResponse(
-      JSON.stringify({ message: 'Document corrected and saved', path: outputPath }),
+      JSON.stringify({ message: 'Document corrected and saved', path: outputPathFile }),
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -283,7 +281,6 @@ export async function GET(req) {
 
 
 //API for getting wrong word and printingn in wrong file
-
 // import mammoth from 'mammoth';
 // import nspell from 'nspell';
 // import { readFile, writeFile } from 'fs/promises';

@@ -14,6 +14,7 @@ const Page = () => {
   const [docId, setDocId] = useState();
   const [language, setLanguage] = useState('');
   const [step, setStep] = useState(1);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
@@ -123,9 +124,18 @@ const Page = () => {
     }
   };
 
+  const handleCheckboxChange = (e) => {
+    console.log(e.target.checked);
+    setIsChecked(e.target.checked);
+  };
+
   return (
-    <div className="p-6 w-full max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Upload File</h1>
+    <div className="p-6 w-full mx-auto">
+      {/* <h1 className="text-3xl font-bold mb-6">Upload File</h1> */}
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Upload File</h1>
+        {language && <span className="text-xl">Selected Language: {language.toUpperCase()}</span>}
+      </div>
       <div className="flex bg-light-background rounded-lg mt-4 py-8">
         <div className="flex-1 p-4 mr-4 border-r">
           {step === 1 && (
@@ -215,10 +225,21 @@ const Page = () => {
                 DOC
               </div>
               <div className="flex-1">
-                <span className="">Uploaded {files.name}</span>
-                <span className="block text-gray-400 text-xs">{parseFloat(files.size / 1024).toFixed(2)} KB</span>
+                {/* <span className="">Uploaded {files.name || "---"} </span>
+                <span className="block text-gray-400 text-xs">{parseFloat(files.size / 1024).toFixed(2)} KB</span> */}
+                <span className="">
+                  Uploaded {files?.name ? files.name : "---"}
+                </span>
+                <span className="block text-gray-400 text-xs">
+                  {files?.size ? `${(files.size / 1024).toFixed(2)} KB` : "--- --"}
+                </span>
               </div>
-              <TiTick className="text-green-500 text-xl" />
+              {/* <TiTick className="text-green-500 text-xl" /> */}
+              {files?.size ? (
+                <TiTick className="text-green-500 text-xl" />
+              ) : (
+                <RxCross2 className="text-red-500 font-bold" />
+              )}
             </li>
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
@@ -267,6 +288,7 @@ const Page = () => {
             href={{
               pathname: "/automation",
               query: { doc_id: docId, lang: language },
+              isChecked: isChecked,
             }}
           >
             <div className="flex justify-end mt-6 ">
@@ -289,9 +311,19 @@ const Page = () => {
                     NEXT
                   </button>
                 )}
+
               </>
             </div>
           </Link>
+          <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              className="form-checkbox"
+            />
+            <span className="ml-2">Do you want Table & Figures?</span>
+          </label>
         </div>
       </div>
     </div>
