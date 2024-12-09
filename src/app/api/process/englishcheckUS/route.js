@@ -57,7 +57,7 @@ const cleanWord = (word) => {
   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
 };
 
-// Recursive function to process XML content
+// Recursive function to process XML content optimized 
 const processXmlContent = (node, spell) => {
   if (Array.isArray(node)) {
     return node.map(item => processXmlContent(item, spell));
@@ -68,7 +68,6 @@ const processXmlContent = (node, spell) => {
       if (key.startsWith('@')) {
         continue;
       }
-
       if (typeof node[key] === 'string') {
         node[key] = processXmlContent(node[key], spell);
       } else {
@@ -83,6 +82,12 @@ const processXmlContent = (node, spell) => {
       .map((word) => {
         word = word.trim();
         word = word.replace(/[“”‘’]/g, '"');
+
+        //return word starting with number as it is
+        if (/^\d/.test(word)) {
+          return word;
+        }
+
         if ((word.startsWith("'") && word.endsWith("'")) || (word.startsWith('"') && word.endsWith('"'))) {
           return word;
         }
@@ -91,8 +96,15 @@ const processXmlContent = (node, spell) => {
         if (cleaned && !spell.correct(cleaned)) {
           const suggestions = spell.suggest(cleaned);
           const correction = suggestions[0] || cleaned;
+          //code to maintain capitilization
+          const isCapitalized = word[0] === word[0].toUpperCase();
+          let correctedWord = correction;
+          if (isCapitalized) {
+            correctedWord = correction[0].toUpperCase() + correction.slice(1).toLowerCase();
+          }
           console.log('word -> ', word, " , correction -> ", correction);
-          return word.replace(word, correction);
+          return word.replace(word, correctedWord);
+          // return word.replace(word, correction);
         }
         return word;
       })
@@ -109,6 +121,7 @@ export async function GET(req) {
 
   try {
     const [rows] = await db.query('SELECT * FROM row_document WHERE row_doc_id = ?', [id]);
+    console.log(rows)
     const filePath = path.join(process.cwd(), rows[0].row_doc_url);
     const buffer = fs.readFileSync(filePath);
 
@@ -121,6 +134,8 @@ export async function GET(req) {
     const startTime = Date.now(); // Start time
     const lines = text.split('\n');
     const logData = [];
+    logData.push(`FileName: ${rows[0].row_doc_name},  Size: ${(rows[0].row_doc_size / 1024).toFixed(2)} KB\n`);
+    logData.push(`Processing started at: ${new Date(startTime).toISOString()}\n`);
 
     lines.forEach((line, index) => {
       const words = line.split(/\s+/);
@@ -128,13 +143,15 @@ export async function GET(req) {
         const cleaned = cleanWord(word);
         if (cleaned && !spell.correct(cleaned)) {
           const suggestions = spell.suggest(cleaned);
-          const suggestionText = suggestions.length > 0 ? suggestions[0] : 'No suggestion';
+          // const suggestionText = suggestions.length > 0 ? suggestions[0] : 'No suggestion';//for one suggestion
+          //for multiple suggestion
+          const suggestionText = suggestions.length > 0
+            ? ` Suggestions: ${suggestions.join(', ')}`
+            : ' No suggestions available';
           logData.push(`Line ${index + 1}: ${word} -> ${suggestionText}`);
         }
       });
     });
-
-    
 
     // Process XML document
     const zip = await JSZip.loadAsync(buffer);
@@ -167,11 +184,11 @@ export async function GET(req) {
     // Calculate time taken
     const endTime = Date.now();
     const timeTaken = ((endTime - startTime) / 1000).toFixed(2); // Time in seconds
-    logData.push(`\nAnalysis completed in ${timeTaken} seconds.`);
+    logData.unshift(`\nAnalysis completed in ${timeTaken} seconds.`);
 
     const row_doc_name = rows[0].row_doc_name;
     const documentName = row_doc_name.replace('.docx', '');
-    const logFileName = `${documentName}_log.txt`;
+    const logFileName = `${documentName}_log_us.txt`;
 
     const outputPathFile = path.join(process.cwd(), 'output', id, logFileName);
     const dir = path.dirname(outputPathFile);

@@ -256,8 +256,8 @@ const Page = () => {
         <div className="mt-6 text-center">
           {/* <h3 className="text-2xl font-semibold">File Process....75% Completed</h3> */}
         </div>
-        {/* <div className="mt-6 flex justify-center space-x-4">
-          {(processState !== "success" || processState1 !== 'success') ? (
+        <div className="mt-6 flex justify-center space-x-4">
+          {(processState1 !== 'success') ? (
             <div>
               <div>
                 <button
@@ -290,9 +290,9 @@ const Page = () => {
               </button>
             </Link>
           )}
-        </div> */}
+        </div>
 
-        <Link
+        {/* <Link
           href={{
             pathname: "/processed",
             query: { doc_id: docId },
@@ -301,7 +301,7 @@ const Page = () => {
           <button className="text-white px-6 py-2 rounded-md border border-white hover:bg-green-500">
             NEXT
           </button>
-        </Link>
+        </Link> */}
 
       </div>
     </div>

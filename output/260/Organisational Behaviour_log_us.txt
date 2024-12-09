@@ -1,0 +1,106 @@
+
+Analysis completed in 15.31 seconds.
+FileName: Organisational Behaviour.docx,  Size: 19.86 KB
+
+Processing started at: 2024-12-09T12:24:57.066Z
+
+Line 3: Organisational -> organizational
+Line 3: Behaviour: -> behavior
+Line 5: Organisational -> organizational
+Line 5: behaviour -> behavior
+Line 5: profesional -> professional
+Line 5: organisational -> organizational
+Line 5: noances -> nuances
+Line 5: behaviour -> behavior
+Line 5: organisational -> organizational
+Line 5: organisational -> organizational
+Line 5: behaviour, -> behavior
+Line 5: organisations. -> organizations
+Line 9: Organisational -> organizational
+Line 9: Behaviour -> behavior
+Line 11: Organisational -> organizational
+Line 11: behaviour -> behavior
+Line 11: organisational -> organizational
+Line 11: 20th -> eh
+Line 11: organisational -> organizational
+Line 13: organisational -> organizational
+Line 13: behaviour -> behavior
+Line 19: organisations -> organizations
+Line 21: organisational -> organizational
+Line 27: Behaviour -> behavior
+Line 29: behaviour -> behavior
+Line 31: consientiousness -> conscientiousness
+Line 31: openess -> openness
+Line 33: organisational -> organizational
+Line 35: others' -> other's
+Line 39: organisational -> organizational
+Line 39: behaviour -> behavior
+Line 39: intract -> intact
+Line 41: norming, -> forming
+Line 41: recognised -> recognized
+Line 47: Organisational -> organizational
+Line 49: organisational -> organizational
+Line 49: behaviour. -> behavior
+Line 51: Organisational -> organizational
+Line 53: Organisational -> organizational
+Line 53: behaviours -> behaviors
+Line 53: organisation. -> organization
+Line 53: Edgar -> Edgar
+Line 53: organisational -> organizational
+Line 55: organisational -> organizational
+Line 59: Organisational -> organizational
+Line 59: Behaviour -> behavior
+Line 67: Herzberg -> No suggestion
+Line 69: emphasises -> emphasis's
+Line 73: organisational -> organizational
+Line 73: behaviour -> behavior
+Line 77: Transformational -> No suggestion
+Line 77: Transformational -> No suggestion
+Line 77: organisational -> organizational
+Line 79: Hersey -> horsey
+Line 79: Blanchard, -> Blanchard
+Line 81: Organisational -> organizational
+Line 83: Organisations -> organizations
+Line 87: Kotter -> jotter
+Line 87: emphasising -> emphasizing
+Line 91: Organisational -> organizational
+Line 91: Behaviour -> behavior
+Line 95: organisational -> organizational
+Line 95: achivements, -> achievements
+Line 95: opportuneties, -> opportunities
+Line 103: Organisational -> organizational
+Line 103: behaviour -> behavior
+Line 103: programmes, -> programmed
+Line 107: organisations -> organizations
+Line 109: Organisational -> organizational
+Line 111: organisations -> organizations
+Line 111: globalisation. -> globalization
+Line 115: Organisational -> organizational
+Line 115: Behaviour -> behavior
+Line 127: Globalisation -> globalization
+Line 127: Organisations -> organizations
+Line 131: organisations, -> organizations
+Line 135: Organisational -> organizational
+Line 135: Behaviour -> behavior
+Line 139: AI -> AI
+Line 141: Wellbeing -> No suggestion
+Line 143: Organisations -> organizations
+Line 143: prioritising -> prioritizing
+Line 143: wellbeing. -> No suggestion
+Line 143: counselling -> counseling
+Line 143: programmes. -> programmed
+Line 147: organisational -> organizational
+Line 149: Personalised -> personalized
+Line 151: customised -> customized
+Line 151: programmes -> programmed
+Line 155: Concluzion -> conclusion
+Line 157: Organisational -> organizational
+Line 157: behaviour -> behavior
+Line 157: organisational -> organizational
+Line 157: behaviour, -> behavior
+Line 157: organisations -> organizations
+Line 157: thrieve, -> thieve
+Line 159: worklace -> workplace
+Line 159: organisational -> organizational
+Line 159: behaviour -> behavior
+Line 159: esential, -> essential

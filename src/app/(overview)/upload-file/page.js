@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import { FiUpload } from 'react-icons/fi';
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Page = () => {
   const fileInputRef = useRef(null);
@@ -168,6 +169,13 @@ const Page = () => {
 
           {step === 2 && (
             <div className="flex-1 p-4 mr-4">
+              <button
+                onClick={() => setStep(1)}
+                className="flex items-center text-custom-green hover:text-green-500 mb-4"
+              >
+                <IoMdArrowRoundBack className="mr-2" />
+                Back to Language Selection
+              </button>
               {error && <p className="text-white text-center pb-4">{error}</p>}
               <div className="flex flex-col items-center">
                 {files.length === 0 ? (
@@ -215,6 +223,7 @@ const Page = () => {
               </div>
             </div>
           )}
+
 
         </div>
 
@@ -287,7 +296,7 @@ const Page = () => {
           <Link
             href={{
               pathname: "/automation",
-              query: { doc_id: docId, lang: language, isChecked: isChecked},
+              query: { doc_id: docId, lang: language, isChecked: isChecked },
             }}
           >
             <div className="flex justify-end mt-6 ">

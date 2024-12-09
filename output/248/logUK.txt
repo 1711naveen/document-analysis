@@ -1,0 +1,37 @@
+Line 5: profesional,   Suggestions: professional
+Line 5: center,   Suggestions: enter, canter, censer, centre, renter
+Line 5: organizational,   Suggestions: organisational
+Line 5: behavior,   Suggestions: behaviour
+Line 5: noances,   Suggestions: nuances
+Line 9: Catalog,   Suggestions: catalpa
+Line 11: color,   Suggestions: colon, colour, Colo
+Line 11: 20th,   Suggestions: eh, oh, tb, tn, uh, Th, h, the, tho, thy, T, Ta, Tc, Te, THC, Thu, Ti, Tl, Tm, To, Tr, Ts, Tu, Ty, ah, ch, ht, nth, sh, DH, NH, pH, Rh, TD, TV, TX
+Line 15: skillful,   Suggestions: skilful
+Line 25: Organizational,   Suggestions: organisational
+Line 25: Behavior,   Suggestions: behaviour
+Line 31: Behavior:,   Suggestions: behaviour
+Line 31: consientiousness,   Suggestions: conscientiousness
+Line 31: openess,   Suggestions: openness, oneness, openers, openest
+Line 35: others',   Suggestions: other's, others
+Line 39: intract,   Suggestions: intact, interact
+Line 41: norming,,   Suggestions: forming, worming
+Line 53: Edgar,   Suggestions: Edgar, edger, Elgar
+Line 53: artifacts,,   Suggestions: artefacts
+Line 67: Herzberg,   No suggestions available
+Line 79: Hersey,   Suggestions: horsey, jersey, Hersey, heresy, Hershey
+Line 79: Blanchard,,   Suggestions: Blanchard
+Line 87: Kotter,   Suggestions: jotter, otter, cotter, hotter, potter, rotter, totter
+Line 95: recognizing,   Suggestions: recognising
+Line 95: achivements,,   Suggestions: achievements
+Line 95: opportuneties,,   Suggestions: opportunities
+Line 139: AI,   Suggestions: AI, aid, ail, aim, air, i, A, Ab, Ac, Ad, Ag, Ah, AIs, Al, Am, An, Ar, As, At, Au, Av, Aw, bi, hi, ii, mi, oi, pi, ti, vi, xi, AA, AF, AK, Ali, AP, API, AVI, AZ, CAI, Ci, Di, GI, Ia, Li, MAI, Ni, RI, Si, WI
+Line 141: Wellbeing,   No suggestions available
+Line 143: wellbeing.,   No suggestions available
+Line 151: personalized,   Suggestions: personalised
+Line 155: Concluzion,   Suggestions: conclusion
+Line 157: endeavors,   Suggestions: endeavours
+Line 157: thrieve,,   Suggestions: thieve, thrive
+Line 159: worklace,   Suggestions: workplace
+Line 159: esential,,   Suggestions: essential
+Line 159: labors,   Suggestions: labours, tabors
+Line 159: organizations,   Suggestions: organisations
