@@ -1,0 +1,7 @@
+Line 3: Organisational -> organizational
+Line 3: Behaviour: -> behavior
+Line 5: Organisational -> organizational
+Line 5: behaviour -> behavior
+Line 5: “helo” -> hello
+Line 5: profesional -> professional
+Line 5: organisational -> organizational

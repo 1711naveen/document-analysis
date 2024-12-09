@@ -13,8 +13,14 @@ const Page = () => {
   const [processState1, setProcessState1] = useState("idle");//Spelling Mistake
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    console.log(typeof isChecked);
+    console.log('isChecked value:', isChecked);
+  }, []);
+
   //function to handle english spelling check
   const handleProcessClick = async () => {
+    console.log(isChecked);
     if (!lang) return;
 
     const apiEndpoint =
@@ -23,21 +29,22 @@ const Page = () => {
         : `/api/process/englishcheckUS?doc_id=${docId}`;
 
     try {
-      setProcessState1("loading"); // Update state to loading
+      setProcessState1("loading");
       const response = await fetch(apiEndpoint);
       if (response.ok) {
-        setProcessState1("success"); // Update state to success
+        setProcessState1("success");
       } else {
         throw new Error("Failed to process");
       }
     } catch (error) {
       console.error("Error:", error);
-      setProcessState1("error"); // Handle errors
+      setProcessState1("error");
     }
   };
 
   const handleAutomation = async () => {
     setProcessState('loading');
+    console.log(isChecked);
     setLoading(true);
     try {
       const response = await fetch(`/api/process/table?doc_id=${docId}`);
@@ -68,39 +75,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col items-center p-8 bg-light-background rounded-lg my-6">
         <div className="flex items-center justify-between w-full">
-          {/* This div is for showing table and figures */}
-          {/* <div className="flex flex-col items-center">
-            <div className="w-10 h-10 rounded-full flex justify-center items-center">
-              {processState === 'idle' && (
-                <p className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center overflow-hidden">
-                  1
-                </p>
-              )}
-              {processState === 'loading' && (
-                <div className="w-10 h-10 bg-blue-500 rounded-full flex justify-center items-center animate-spin duration-[60s] overflow-hidden ">
-                  <img src="/loading.png" alt="spinner" className="w-full h-full object-cover" />
-                </div>
-              )}
-              {processState === 'success' && (
-                <FaCheckCircle className="text-green-500 w-6 h-6" />
-              )}
-            </div>
-            <p className="text-sm mt-2 text-center bg-[#03030329] p-2 rounded-lg">
-              Table & Figures
-            </p>
-            <div className='mt-2'>
-              <button
-                className="bg-custom-green hover:bg-green-500 text-white px-4 py-2 rounded-md"
-                onClick={handleStart}
-                disabled={processState === "loading"}
-              >
-                {processState === "loading" ? "Processing..." : "Start"}
-              </button>
-            </div>
-          </div>
-          <div className="w-full h-0.5 bg-gray-300 -mt-24"></div>*/}
-
-          {isChecked && (
+          {isChecked==='true' && (
             <>
               <div className="flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full flex justify-center items-center">
