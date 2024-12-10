@@ -1,0 +1,106 @@
+
+Analysis completed in 38.72 seconds.
+FileName: Organisational Behaviour.docx,  Size: 19.86 KB
+
+Processing started at: 2024-12-10T06:55:44.982Z
+
+Line 3: Organisational ->  Suggestions: organizational
+Line 3: Behaviour: ->  Suggestions: behavior
+Line 5: Organisational ->  Suggestions: organizational
+Line 5: behaviour ->  Suggestions: behavior
+Line 5: profesional ->  Suggestions: professional
+Line 5: organisational ->  Suggestions: organizational
+Line 5: noances ->  Suggestions: nuances
+Line 5: behaviour ->  Suggestions: behavior
+Line 5: organisational ->  Suggestions: organizational
+Line 5: organisational ->  Suggestions: organizational
+Line 5: behaviour, ->  Suggestions: behavior
+Line 5: organisations. ->  Suggestions: organizations
+Line 9: Organisational ->  Suggestions: organizational
+Line 9: Behaviour ->  Suggestions: behavior
+Line 11: Organisational ->  Suggestions: organizational
+Line 11: behaviour ->  Suggestions: behavior
+Line 11: organisational ->  Suggestions: organizational
+Line 11: 20th ->  Suggestions: eh, oh, tb, tn, uh, Th, h, the, tho, thy, T, Ta, Tc, Te, THC, Thu, Ti, Tl, Tm, To, Tr, Ts, Tu, Ty, ah, ch, ht, nth, sh, DH, NH, pH, Rh, TD, TV, TX
+Line 11: organisational ->  Suggestions: organizational
+Line 13: organisational ->  Suggestions: organizational
+Line 13: behaviour ->  Suggestions: behavior
+Line 19: organisations ->  Suggestions: organizations
+Line 21: organisational ->  Suggestions: organizational
+Line 27: Behaviour ->  Suggestions: behavior
+Line 29: behaviour ->  Suggestions: behavior
+Line 31: consientiousness ->  Suggestions: conscientiousness
+Line 31: openess ->  Suggestions: openness, oneness, openers, openest
+Line 33: organisational ->  Suggestions: organizational
+Line 35: others' ->  Suggestions: other's, others
+Line 39: organisational ->  Suggestions: organizational
+Line 39: behaviour ->  Suggestions: behavior
+Line 39: intract ->  Suggestions: intact, interact
+Line 41: norming, ->  Suggestions: forming, worming
+Line 41: recognised ->  Suggestions: recognized
+Line 47: Organisational ->  Suggestions: organizational
+Line 49: organisational ->  Suggestions: organizational
+Line 49: behaviour. ->  Suggestions: behavior
+Line 51: Organisational ->  Suggestions: organizational
+Line 53: Organisational ->  Suggestions: organizational
+Line 53: behaviours ->  Suggestions: behaviors
+Line 53: organisation. ->  Suggestions: organization
+Line 53: Edgar ->  Suggestions: Edgar, edger, Elgar
+Line 53: organisational ->  Suggestions: organizational
+Line 55: organisational ->  Suggestions: organizational
+Line 59: Organisational ->  Suggestions: organizational
+Line 59: Behaviour ->  Suggestions: behavior
+Line 67: Herzberg ->  No suggestions available
+Line 69: emphasises ->  Suggestions: emphasis's, emphasizes
+Line 73: organisational ->  Suggestions: organizational
+Line 73: behaviour ->  Suggestions: behavior
+Line 77: Transformational ->  No suggestions available
+Line 77: Transformational ->  No suggestions available
+Line 77: organisational ->  Suggestions: organizational
+Line 79: Hersey ->  Suggestions: horsey, jersey, Hersey, heresy, Hershey
+Line 79: Blanchard, ->  Suggestions: Blanchard
+Line 81: Organisational ->  Suggestions: organizational
+Line 83: Organisations ->  Suggestions: organizations
+Line 87: Kotter ->  Suggestions: jotter, otter, cotter, hotter, potter, rotter, totter
+Line 87: emphasising ->  Suggestions: emphasizing
+Line 91: Organisational ->  Suggestions: organizational
+Line 91: Behaviour ->  Suggestions: behavior
+Line 95: organisational ->  Suggestions: organizational
+Line 95: achivements, ->  Suggestions: achievements
+Line 95: opportuneties, ->  Suggestions: opportunities
+Line 103: Organisational ->  Suggestions: organizational
+Line 103: behaviour ->  Suggestions: behavior
+Line 103: programmes, ->  Suggestions: programmed, programmer, programmers
+Line 107: organisations ->  Suggestions: organizations
+Line 109: Organisational ->  Suggestions: organizational
+Line 111: organisations ->  Suggestions: organizations
+Line 111: globalisation. ->  Suggestions: globalization
+Line 115: Organisational ->  Suggestions: organizational
+Line 115: Behaviour ->  Suggestions: behavior
+Line 127: Globalisation ->  Suggestions: globalization
+Line 127: Organisations ->  Suggestions: organizations
+Line 131: organisations, ->  Suggestions: organizations
+Line 135: Organisational ->  Suggestions: organizational
+Line 135: Behaviour ->  Suggestions: behavior
+Line 139: AI ->  Suggestions: AI, aid, ail, aim, air, i, A, Ab, Ac, Ad, Ag, Ah, AIs, Al, Am, An, Ar, As, At, Au, Av, Aw, Ax, bi, hi, ii, mi, oi, pi, ti, vi, xi, AA, AF, AK, Ali, AP, API, AVI, AZ, CAI, Ci, Di, GI, Ia, Li, MAI, Ni, RI, Si, WI
+Line 141: Wellbeing ->  No suggestions available
+Line 143: Organisations ->  Suggestions: organizations
+Line 143: prioritising ->  Suggestions: prioritizing
+Line 143: wellbeing. ->  No suggestions available
+Line 143: counselling ->  Suggestions: counseling
+Line 143: programmes. ->  Suggestions: programmed, programmer, programmers
+Line 147: organisational ->  Suggestions: organizational
+Line 149: Personalised ->  Suggestions: personalized
+Line 151: customised ->  Suggestions: customized
+Line 151: programmes ->  Suggestions: programmed, programmer, programmers
+Line 155: Concluzion ->  Suggestions: conclusion
+Line 157: Organisational ->  Suggestions: organizational
+Line 157: behaviour ->  Suggestions: behavior
+Line 157: organisational ->  Suggestions: organizational
+Line 157: behaviour, ->  Suggestions: behavior
+Line 157: organisations ->  Suggestions: organizations
+Line 157: thrieve, ->  Suggestions: thieve, thrive
+Line 159: worklace ->  Suggestions: workplace
+Line 159: organisational ->  Suggestions: organizational
+Line 159: behaviour ->  Suggestions: behavior
+Line 159: esential, ->  Suggestions: essential

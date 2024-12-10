@@ -28,17 +28,21 @@ const Page = () => {
         ? `/api/process/englishcheckUK?doc_id=${docId}`
         : `/api/process/englishcheckUS?doc_id=${docId}`;
 
+    setLoading(true);
     try {
       setProcessState1("loading");
       const response = await fetch(apiEndpoint);
       if (response.ok) {
         setProcessState1("success");
+        setLoading(false);
       } else {
+        setLoading(false);
         throw new Error("Failed to process");
       }
     } catch (error) {
       console.error("Error:", error);
       setProcessState1("error");
+      setLoading(false);
     }
   };
 
@@ -75,7 +79,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col items-center p-8 bg-light-background rounded-lg my-6">
         <div className="flex items-center justify-between w-full">
-          {isChecked==='true' && (
+          {isChecked === 'true' && (
             <>
               <div className="flex flex-col items-center">
                 <div className="w-10 h-10 rounded-full flex justify-center items-center">
@@ -257,7 +261,7 @@ const Page = () => {
           {/* <h3 className="text-2xl font-semibold">File Process....75% Completed</h3> */}
         </div>
         <div className="mt-6 flex justify-center space-x-4">
-          {(processState1 !== 'success') ? (
+          {(processState1 !== 'success' && processState !== 'success') ? (
             <div>
               <div>
                 <button

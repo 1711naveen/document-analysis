@@ -102,7 +102,7 @@ const processXmlContent = (node, spell) => {
           if (isCapitalized) {
             correctedWord = correction[0].toUpperCase() + correction.slice(1).toLowerCase();
           }
-          console.log('word -> ', word, " , correction -> ", correction);
+          // console.log('word -> ', word, " , correction -> ", correction);
           return word.replace(word, correctedWord);
           // return word.replace(word, correction);
         }

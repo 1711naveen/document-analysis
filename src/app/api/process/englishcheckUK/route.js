@@ -113,7 +113,7 @@ const processXmlContent = (node, spell) => {
         if (cleaned && !spell.correct(cleaned)) {
           const suggestions = spell.suggest(cleaned);
           const correction = suggestions[0] || cleaned;
-          console.log('word -> ', word, " , correction -> ", correction);
+          // console.log('word -> ', word, " , correction -> ", correction);
           return word.replace(word, correction);
         }
         return word;
@@ -220,10 +220,8 @@ export async function GET(req) {
     );
 
     if (existingRows.length > 0) {
-      // Entry already exists; skip the insert
       console.log('File already processed in final_document. Skipping insert.');
     } else {
-      // Entry does not exist; proceed with the insert
       const folderUrl = `/output/${id}/`;
       const [rows_effected] = await db.execute(
         'INSERT INTO final_document (row_doc_id, user_id, final_doc_size, final_doc_url, status, creation_date) VALUES (?, ?, ?, ?, ?, NOW())',

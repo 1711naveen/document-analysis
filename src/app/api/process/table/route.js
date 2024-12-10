@@ -93,7 +93,7 @@ export async function GET(request) {
       [id]
     );
 
-    console.log(rows);
+    // console.log(rows);
     const filePath = path.join(process.cwd(), rows[0].row_doc_url);
 
     try {
@@ -128,8 +128,8 @@ export async function GET(request) {
         return result;
       });
 
-      console.log(tableArray);
-      console.log(figureArray);
+      // console.log(tableArray);
+      // console.log(figureArray);
 
       writeArrayToDocx(updatedTableArray, "Table.docx", id, "List of Tables", `Chapter ${chapter}`);
       writeArrayToDocx(updatedFigureArray, "Figure.docx", id, "List of Figures", `Chapter ${chapter}`);
