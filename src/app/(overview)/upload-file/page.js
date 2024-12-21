@@ -66,7 +66,7 @@ const Page = () => {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch('http://127.0.0.1:8000/upload/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ const Page = () => {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch('http://127.0.0.1:8000/upload/', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -260,6 +260,19 @@ const Page = () => {
               </div>
               {fileData.pages ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
+
+            {/* Total Units */}
+            <li className="flex items-center">
+              <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
+                {fileData.units ? `${fileData.units}` : '---'}
+              </div>
+              <div className="flex-1">
+                <span className="">Total Units</span>
+                <span className="block text-gray-400 text-xs">{fileData.units || '---'}</span>
+              </div>
+              {fileData.units ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className="text-red-500 font-bold" />}
+            </li>
+
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
                 {fileData.words || '---'}

@@ -113,7 +113,8 @@ const FileTable = ({ folderId }) => {
     setIsDownloading(true);
 
     try {
-      const downloadUrl = `/api/downloadfile?id=${folderId}&file=${fileName}`;
+      // const downloadUrl = `/api/downloadfile?id=${folderId}&file=${fileName}`;
+      const downloadUrl = `http://127.0.0.1:8000/download_file?id=${folderId}&file=${fileName}`;
       const response = await fetch(downloadUrl);
 
       if (response.ok) {
@@ -137,14 +138,14 @@ const FileTable = ({ folderId }) => {
   };
 
   const handleOpen = (fileName) => {
-    const fileUrl = `/api/openfile?final_doc_id=${folderId}&file=${fileName}`;
-    window.open(fileUrl, '_blank');
+    const fileUrl = `http://127.0.0.1:8000/openfile?final_doc_id=${folderId}&file=${fileName}`;
+    window.open(fileUrl);
   };
 
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const response = await fetch(`/api/files?id=${folderId}`);
+        const response = await fetch(`http://127.0.0.1:8000/list_files?id=${folderId}`);
         const data = await response.json();
 
         if (response.ok) {

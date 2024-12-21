@@ -7,7 +7,7 @@ import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 const Page = () => {
   const searchParams = useSearchParams()
   const docId = searchParams.get('doc_id');
-  const lang = searchParams.get('lang');
+  const lang = searchParams.get('lang') || 'us';
   const isChecked = searchParams.get('isChecked');
   const [processState, setProcessState] = useState('idle');//Table
   const [processState1, setProcessState1] = useState("idle");//Spelling Mistake
@@ -23,10 +23,12 @@ const Page = () => {
     console.log(isChecked);
     if (!lang) return;
 
-    const apiEndpoint =
-      lang === "uk"
-        ? `/api/process/englishcheckUK?doc_id=${docId}`
-        : `/api/process/englishcheckUS?doc_id=${docId}`;
+    let apiEndpoint;
+    if (lang === "us") {
+      apiEndpoint = `http://127.0.0.1:8000/process_us?doc_id=${docId}`;
+    } else if (lang === "uk") {
+      apiEndpoint = `http://127.0.0.1:8000/process_uk?doc_id=${docId}`;
+    }
 
     setLoading(true);
     try {
@@ -51,7 +53,7 @@ const Page = () => {
     console.log(isChecked);
     setLoading(true);
     try {
-      const response = await fetch(`/api/process/table?doc_id=${docId}`);
+      const response = await fetch(`http://127.0.0.1:8000/process_document?doc_id=${docId}`);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       if (response.ok) {
         setProcessState('success');

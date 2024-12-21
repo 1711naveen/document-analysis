@@ -57,62 +57,36 @@ const cleanWord = (word) => {
   return /^[a-zA-Z']+$/.test(cleaned) ? cleaned : '';
 };
 
-// Recursive function to process XML content optimized 
-const processXmlContent = (node, spell) => {
-  if (Array.isArray(node)) {
-    return node.map(item => processXmlContent(item, spell));
-  }
 
-  if (typeof node === 'object') {
-    for (let key in node) {
-      if (key.startsWith('@')) {
-        continue;
-      }
-      if (typeof node[key] === 'string') {
-        node[key] = processXmlContent(node[key], spell);
-      } else {
-        node[key] = processXmlContent(node[key], spell);
-      }
+function processXmlContent(xmlData, spell) {
+  function traverseAndCheckWords(node) {
+    if (node && node['w:t']) {
+      const textContent = node['w:t']; // Get the text content
+      const words = textContent.split(' '); // Split text into words
+      console.log("words")
+      console.log(words)
+      
+      const highlightedText = words.map(word => {
+        const cleaned = cleanWord(word);
+        if (!spell.correct(cleaned)) {
+          return `<w:r><w:rPr><w:highlight w:val="yellow"/></w:rPr><w:t>${cleaned}</w:t></w:r>`;
+        }
+        return `<w:r><w:rPr/><w:t>${cleaned}</w:t></w:r>`;
+      }).join('');
+
+      node['w:t'] = highlightedText;
+    }
+
+    if (node['w:r']) {
+      node['w:r'].forEach(childNode => traverseAndCheckWords(childNode));
     }
   }
 
-  if (typeof node === 'string') {
-    return node
-      .split(/\s+/)
-      .map((word) => {
-        word = word.trim();
-        word = word.replace(/[“”‘’]/g, '"');
+  traverseAndCheckWords(xmlData['w:document']['w:body']);
 
-        //return word starting with number as it is
-        if (/^\d/.test(word)) {
-          return word;
-        }
+  return xmlData;
+}
 
-        if ((word.startsWith("'") && word.endsWith("'")) || (word.startsWith('"') && word.endsWith('"'))) {
-          return word;
-        }
-
-        const cleaned = cleanWord(word);
-        if (cleaned && !spell.correct(cleaned)) {
-          const suggestions = spell.suggest(cleaned);
-          const correction = suggestions[0] || cleaned;
-          //code to maintain capitilization
-          const isCapitalized = word[0] === word[0].toUpperCase();
-          let correctedWord = correction;
-          if (isCapitalized) {
-            correctedWord = correction[0].toUpperCase() + correction.slice(1).toLowerCase();
-          }
-          // console.log('word -> ', word, " , correction -> ", correction);
-          return word.replace(word, correctedWord);
-          // return word.replace(word, correction);
-        }
-        return word;
-      })
-      .join(' ');
-  }
-
-  return node;
-};
 
 
 export async function GET(req) {
@@ -170,6 +144,7 @@ export async function GET(req) {
     // console.log(wBody)
     // return;
     const correctedXmlData = processXmlContent(xmlData, spell);
+    console.log(typeof correctedXmlData);
 
     const builder = new XMLBuilder(parserOptions);
     const updatedDocumentXml = builder.build(correctedXmlData);

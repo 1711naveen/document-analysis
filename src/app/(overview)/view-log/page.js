@@ -66,8 +66,7 @@ const Page = () => {
 
 
   return (
-    <div className="p-6 w-full max-w-4xl mx-auto">
-
+    <div className="p-6 w-full mx-auto">
       <h2 className="text-3xl text-white font-bold mb-4 ">View Log</h2>
 
       <div className="overflow-x-auto bg-light-background rounded-xl">
