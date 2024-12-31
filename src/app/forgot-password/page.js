@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from 'next/navigation'
+import { API_BASE_URL } from "@/constant";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,8 @@ const Page = () => {
 
   const handleForgotPassword = async () => {
     try {
-      const response = await fetch("/api/reset-password", {
+      // const response = await fetch("/api/reset-password", {
+      const response = await fetch(`${API_BASE_URL}reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

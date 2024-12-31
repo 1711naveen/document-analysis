@@ -2,6 +2,7 @@
 import React from 'react'
 import { useSearchParams } from 'next/navigation'
 import FileTable from '@/components/FileTable'
+import { API_BASE_URL } from '@/constant'
 
 const Page = () => {
   const searchParams = useSearchParams()
@@ -10,7 +11,7 @@ const Page = () => {
 
   const handleDownloadFile = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/download_zip?final_doc_id=${docId}`);
+      const response = await fetch(`${API_BASE_URL}download_zip?final_doc_id=${docId}`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);

@@ -5,11 +5,12 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useRouter } from 'next/navigation'
 import { CgProfile } from "react-icons/cg";
 import Link from 'next/link';
+import { API_BASE_URL } from '@/constant';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('admin@demo.com');
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState('12345');
   const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
 
@@ -21,7 +22,7 @@ const Login = () => {
     console.log(email)
     console.log(password);
     try {
-      const response = await fetch('api/login', {
+      const response = await fetch(`${API_BASE_URL}login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

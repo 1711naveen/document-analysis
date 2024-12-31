@@ -34,7 +34,7 @@ const Page = () => {
     }
     try {
       const email = localStorage.getItem('email')
-      const response = await fetch('/api/change-password', {
+      const response = await fetch(`${API_BASE_URL}change-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 'use client'
+import { API_BASE_URL } from '@/constant';
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -25,9 +26,9 @@ const Page = () => {
 
     let apiEndpoint;
     if (lang === "us") {
-      apiEndpoint = `http://127.0.0.1:8000/process_us?doc_id=${docId}`;
+      apiEndpoint = `${API_BASE_URL}process_us?doc_id=${docId}`;
     } else if (lang === "uk") {
-      apiEndpoint = `http://127.0.0.1:8000/process_uk?doc_id=${docId}`;
+      apiEndpoint = `${API_BASE_URL}process_uk?doc_id=${docId}`;
     }
 
     setLoading(true);
@@ -53,7 +54,7 @@ const Page = () => {
     console.log(isChecked);
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/process_document?doc_id=${docId}`);
+      const response = await fetch(`${API_BASE_URL}process_document?doc_id=${docId}`);
       await new Promise((resolve) => setTimeout(resolve, 2000));
       if (response.ok) {
         setProcessState('success');

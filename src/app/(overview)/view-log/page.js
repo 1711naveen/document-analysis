@@ -1,4 +1,5 @@
 'use client'
+import { API_BASE_URL } from '@/constant';
 import React, { useEffect, useState } from 'react'
 
 const Page = () => {
@@ -12,6 +13,7 @@ const Page = () => {
     const fetchFileNames = async () => {
       try {
         const response = await fetch('/api/raw-document-name');
+        // const response = await fetch(`${API_BASE_URL}get_documents`);
         if (!response.ok) {
           throw new Error('Failed to fetch filenames');
         }
@@ -45,7 +47,7 @@ const Page = () => {
 
   const handleDownload = async (finalDocId) => {
     try {
-      const response = await fetch(`/api/download?final_doc_id=${finalDocId}`);
+      const response = await fetch(`${API_BASE_URL}download?final_doc_id=${finalDocId}`);
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -141,3 +143,5 @@ const Page = () => {
 }
 
 export default Page
+
+

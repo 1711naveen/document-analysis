@@ -5,6 +5,9 @@ import { FiUpload } from 'react-icons/fi';
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { API_BASE_URL } from '@/constant';
+
+
 
 const Page = () => {
   const fileInputRef = useRef(null);
@@ -16,6 +19,7 @@ const Page = () => {
   const [language, setLanguage] = useState('');
   const [step, setStep] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
+
 
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
@@ -66,7 +70,7 @@ const Page = () => {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/upload/', {
+      const response = await fetch(`${API_BASE_URL}upload`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,7 +113,7 @@ const Page = () => {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/upload/', {
+      const response = await fetch(`${API_BASE_URL}upload`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -234,8 +238,6 @@ const Page = () => {
                 DOC
               </div>
               <div className="flex-1">
-                {/* <span className="">Uploaded {files.name || "---"} </span>
-                <span className="block text-gray-400 text-xs">{parseFloat(files.size / 1024).toFixed(2)} KB</span> */}
                 <span className="">
                   Uploaded {files?.name ? files.name : "---"}
                 </span>
@@ -243,7 +245,6 @@ const Page = () => {
                   {files?.size ? `${(files.size / 1024).toFixed(2)} KB` : "--- --"}
                 </span>
               </div>
-              {/* <TiTick className="text-green-500 text-xl" /> */}
               {files?.size ? (
                 <TiTick className="text-green-500 text-xl" />
               ) : (
@@ -261,8 +262,19 @@ const Page = () => {
               {fileData.pages ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
 
-            {/* Total Units */}
             <li className="flex items-center">
+              <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
+                {Math.floor(fileData.characters / 1000) ? `${Math.floor(fileData.characters / 1000)}K` : '---'}
+              </div>
+              <div className="flex-1">
+                <span className="">Total Characters</span>
+                <span className="block text-gray-400 text-xs">{fileData.characters || '---'}</span>
+              </div>
+              {fileData.characters ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
+            </li>
+
+            {/* Total Units */}
+            {/* <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
                 {fileData.units ? `${fileData.units}` : '---'}
               </div>
@@ -271,7 +283,51 @@ const Page = () => {
                 <span className="block text-gray-400 text-xs">{fileData.units || '---'}</span>
               </div>
               {fileData.units ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className="text-red-500 font-bold" />}
+            </li> */}
+
+
+            <li className="flex items-center">
+              <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
+                {fileData.units ? `${fileData.units}` : '---'}
+              </div>
+              <div className="flex-1">
+                <span className="flex items-center gap-2">
+                  Total Units
+                  {/* Info icon with tooltip */}
+                  <div className="relative group">
+                    <span className="text-gray-400 cursor-pointer">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </span>
+                    {/* Tooltip */}
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 hidden group-hover:block bg-gray-700 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+                      Units is (Total Characters)/250
+                    </div>
+                  </div>
+                </span>
+                <span className="block text-gray-400 text-xs">{fileData.units || '---'}</span>
+              </div>
+              {fileData.units ? (
+                <TiTick className="text-green-500 text-xl" />
+              ) : (
+                <RxCross2 className="text-red-500 font-bold" />
+              )}
             </li>
+
+
+
 
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
@@ -283,16 +339,7 @@ const Page = () => {
               </div>
               {fileData.words ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
             </li>
-            <li className="flex items-center">
-              <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
-                {Math.floor(fileData.characters / 1000) ? `${Math.floor(fileData.characters / 1000)}K` : '---'}
-              </div>
-              <div className="flex-1">
-                <span className="">Total Characters</span>
-                <span className="block text-gray-400 text-xs">{fileData.characters || '---'}</span>
-              </div>
-              {fileData.characters ? <TiTick className="text-green-500 text-xl" /> : <RxCross2 className='text-red-500 font-bold' />}
-            </li>
+            
             <li className="flex items-center">
               <div className="flex items-center justify-center bg-custom-green text-sm text-white rounded-full w-10 h-10 mr-3">
                 off
@@ -301,8 +348,6 @@ const Page = () => {
                 <span className="">Change Tracker Status</span>
                 <span className="block text-gray-400 text-xs">off</span>
               </div>
-              {/* <TiTick className="text-green-500 text-xl" />
-              {fileData.characters?<TiTick className="text-green-500 text-xl" />:<RxCross2 className='text-red-500 font-bold'/>} */}
               <RxCross2 className='text-red-500 font-bold' />
             </li>
           </ul>
